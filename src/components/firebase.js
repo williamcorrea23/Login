@@ -7,12 +7,13 @@ import {getFirestore} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDrB9FupDgjjVk4_guLC24ydG3retE3bME",
-  authDomain: "login-auth-4736e.firebaseapp.com",
-  projectId: "login-auth-4736e",
-  storageBucket: "login-auth-4736e.appspot.com",
-  messagingSenderId: "10562914305",
-  appId: "1:10562914305:web:2cff37be4fa9ccf0a29800"
+  apiKey: "AIzaSyDwNC4QWaBQYqvayl98oMArcGdYV0JuqSk",
+  authDomain: "elearning-568mbq.firebaseapp.com",
+  projectId: "elearning-568mbq",
+  storageBucket: "elearning-568mbq.appspot.com",
+  messagingSenderId: "956581108104",
+  appId: "1:956581108104:web:2be9a9b0c5978cd4b3823d",
+  measurementId: "G-WLB4FBXE9R"
 };
 
 // Initialize Firebase
