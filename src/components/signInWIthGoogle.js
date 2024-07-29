@@ -22,7 +22,7 @@ function SignInwithGoogle({ fname, lname }) {
           await setDoc(userDocRef, {
             email: user.email,
             firstName: user.displayName,
-            lastName: user.lastName,
+            lastName: "",
             photo: "",
             mensagensRest: 50,
             redacoesRest: 2,
