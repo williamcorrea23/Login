@@ -3,13 +3,15 @@ import { auth, db } from "./firebase";
 import { toast } from "react-toastify";
 import { setDoc, doc } from "firebase/firestore";
 
-function SignInwithGoogle() {
-  function googleLogin() {
+function SignInwithGoogle({ fname, lname }) {
+ async function googleLogin() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then(async (result) => {
       console.log(result);
       const user = result.user;
       if (result.user) {
+
+         try {
          await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
           firstName: fname,
@@ -18,47 +20,41 @@ function SignInwithGoogle() {
           mensagensRest: 50,
           redacoesRest: 2
         });
-
-const enemDataRef = collection(userDocRef, "EnemData");
-      await addDoc(enemDataRef, {
-        espanhol: {
-          acertos: 0,
-          erros: 0
-        },
-          Ingles: {
-          acertos: 0,
-          erros: 0
-        },
-        ling: {
-          acertos: 0,
-          erros: 0
-        },
-        matematica: {
-          acertos: 0,
-          erros: 0
-        },
-        cienciasHumanas: {
-          acertos: 0,
-          erros: 0
-        },
-        cienciasDaNatureza: {
-          acertos: 0,
-          erros: 0
-        },
-        redacao: {
-          notaTotal: 0,
-          redacoesFeitas: 0
+ } catch (error) {
+          console.error("Error setting user document:", error);
+          toast.error("Failed to save user data", {
+            position: "top-center",
+          });
+          return;
         }
-
-        
-        });
+const enemDataRef = collection(userDocRef, "EnemData");
+        try {
+      await addDoc(enemDataRef, {
+            espanhol: { acertos: 0, erros: 0 },
+            Ingles: { acertos: 0, erros: 0 },
+            ling: { acertos: 0, erros: 0 },
+            matematica: { acertos: 0, erros: 0 },
+            cienciasHumanas: { acertos: 0, erros: 0 },
+            cienciasDaNatureza: { acertos: 0, erros: 0 },
+            redacao: { notaTotal: 0, redacoesFeitas: 0 },
+             });
+          
+         } catch (error) {
+          console.error("Error adding EnemData document:", error);
+          toast.error("Failed to save Enem data", {
+            position: "top-center",
+          });   return; } 
         toast.success("User logged in Successfully", {
           position: "top-center",
         });
         window.location.href = "/profile";
       }
+        catch (error) {
+      console.error("Error during sign in with Google:", error);
+      toast.error("Failed to log in with Google", {
+        position: "top-center",
     });
-  }
+  } }
   return (
     <div>
       <p className="continue-p">--Or continue with--</p>
