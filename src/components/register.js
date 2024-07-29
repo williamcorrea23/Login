@@ -22,13 +22,21 @@ function Register() {
           firstName: fname,
           lastName: lname,
           photo:"",
-          mensagensRestantes: 50,
-          redacoesRestantes: 2
+          mensagensRest: 50,
+          redacoesRest: 2
         });
 
 const enemDataRef = collection(userDocRef, "EnemData");
       await addDoc(enemDataRef, {
-        linguagens: {
+        espanhol: {
+          acertos: 0,
+          erros: 0
+        },
+          Ingles: {
+          acertos: 0,
+          erros: 0
+        },
+        ling: {
           acertos: 0,
           erros: 0
         },
