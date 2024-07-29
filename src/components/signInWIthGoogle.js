@@ -13,7 +13,7 @@ function SignInwithGoogle({ fname, lname }) {
 
       if (user) {
         const userDocRef = doc(db, "Users", user.uid);
-
+        const currentDate = new Date();
         // Check if firstName and lastName are provided
         //const firstName = fname || "DefaultFirstName";
         //const lastName = lname || "DefaultLastName";
