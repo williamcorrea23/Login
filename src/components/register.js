@@ -22,7 +22,7 @@ function Register() {
         await setDoc(userDocRef, {
           email: user.email,
           firstName: user.displayName,
-          lastName: lname,
+          lastName: user.lastName,
           photo:"",
           mensagensRest: 50,
           redacoesRest: 2
