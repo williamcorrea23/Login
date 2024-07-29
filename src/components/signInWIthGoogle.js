@@ -14,14 +14,14 @@ function SignInwithGoogle({ fname, lname }) {
         const userDocRef = doc(db, "Users", user.uid);
 
         // Check if firstName and lastName are provided
-        const firstName = fname || "DefaultFirstName";
-        const lastName = lname || "DefaultLastName";
+        //const firstName = fname || "DefaultFirstName";
+        //const lastName = lname || "DefaultLastName";
 
         try {
           await setDoc(userDocRef, {
             email: user.email,
-            firstName,
-            lastName,
+            firstName: user.displayName,
+            lastName: "",
             photo: "",
             mensagensRest: 50,
             redacoesRest: 2,
