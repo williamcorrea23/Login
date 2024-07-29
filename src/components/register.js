@@ -28,34 +28,13 @@ function Register() {
 
 const enemDataRef = collection(userDocRef, "EnemData");
       await addDoc(enemDataRef, {
-        espanhol: {
-          acertos: 0,
-          erros: 0
-        },
-          Ingles: {
-          acertos: 0,
-          erros: 0
-        },
-        ling: {
-          acertos: 0,
-          erros: 0
-        },
-        matematica: {
-          acertos: 0,
-          erros: 0
-        },
-        cienciasHumanas: {
-          acertos: 0,
-          erros: 0
-        },
-        cienciasDaNatureza: {
-          acertos: 0,
-          erros: 0
-        },
-        redacao: {
-          notaTotal: 0,
-          redacoesFeitas: 0
-        }
+            espanhol: { acertos: 0, erros: 0 },
+            Ingles: { acertos: 0, erros: 0 },
+            ling: { acertos: 0, erros: 0 },
+            matematica: { acertos: 0, erros: 0 },
+            cienciasHumanas: { acertos: 0, erros: 0 },
+            cienciasDaNatureza: { acertos: 0, erros: 0 },
+            redacao: { notaTotal: 0, redacoesFeitas: 0 },
       });
         
       }
