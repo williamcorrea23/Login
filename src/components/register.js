@@ -21,7 +21,7 @@ function Register() {
         const userDocRef = doc(db, "Users", user.uid);        
         await setDoc(userDocRef, {
           email: user.email,
-          firstName: fname,
+          firstName: user.displayName,
           lastName: lname,
           photo:"",
           mensagensRest: 50,
