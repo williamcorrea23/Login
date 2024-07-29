@@ -25,6 +25,7 @@ function SignInwithGoogle({ fname, lname }) {
             photo: "",
             mensagensRest: 50,
             redacoesRest: 2,
+             lastMessageDate: firebase.firestore.Timestamp.fromDate(currentDate)
           });
         } catch (error) {
           console.error("Error setting user document:", error);
