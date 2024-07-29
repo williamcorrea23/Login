@@ -25,7 +25,8 @@ function Register() {
           lastName: user.lastName,
           photo:"",
           mensagensRest: 50,
-          redacoesRest: 2
+          redacoesRest: 2,
+          lastMessageDate: firebase.firestore.Timestamp.fromDate(currentDate)
         });
 
 const enemDataRef = collection(userDocRef, "EnemData");
