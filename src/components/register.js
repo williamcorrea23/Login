@@ -16,6 +16,7 @@ function Register() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
+      const currentDate = new Date();
       console.log(user);
       if (user) 
       {
