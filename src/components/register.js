@@ -21,8 +21,35 @@ function Register() {
           email: user.email,
           firstName: fname,
           lastName: lname,
-          photo:""
+          photo:"",
+          mensagensRestantes: 50,
+          redacoesRestantes: 2
         });
+
+const enemDataRef = collection(userDocRef, "EnemData");
+      await addDoc(enemDataRef, {
+        linguagens: {
+          acertos: 0,
+          erros: 0
+        },
+        matematica: {
+          acertos: 0,
+          erros: 0
+        },
+        cienciasHumanas: {
+          acertos: 0,
+          erros: 0
+        },
+        cienciasDaNatureza: {
+          acertos: 0,
+          erros: 0
+        },
+        redacao: {
+          notaTotal: 0,
+          redacoesFeitas: 0
+        }
+      });
+        
       }
       console.log("User Registered Successfully!!");
       toast.success("User Registered Successfully!!", {
