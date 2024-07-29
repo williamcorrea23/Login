@@ -26,7 +26,7 @@ function SignInwithGoogle({ fname, lname }) {
             photo: "",
             mensagensRest: 50,
             redacoesRest: 2,
-            lastMessageDate: currentDate.toISOString(),
+            lastMessageDate: currentDate.toISOString()
           });
         } catch (error) {
           console.error("Error setting user document:", error);
