@@ -27,7 +27,7 @@ function Register() {
           photo:"",
           mensagensRest: 50,
           redacoesRest: 2,
-          lastMessageDate: currentDate.toISOString(),
+          lastMessageDate: currentDate.toISOString()
         });
 
 const enemDataRef = collection(userDocRef, "EnemData");
