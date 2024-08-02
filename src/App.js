@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+//import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 import "./App.css";
 //import { NavigationContainer } from '@react-navigation/native';
 //import { createStackNavigator } from '@react-navigation/stack';
