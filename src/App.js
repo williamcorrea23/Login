@@ -7,7 +7,7 @@ import Dashboard from './screens/Dashboard';
 import Lessons from './screens/Lessons';
 import Exercises from './screens/Exercises';
 import Chatbot from './components/Chatbot';
-import profile from './components/profile';
+import Profile from './components/profile';
 import redacao from './screens/redacao';
 import {
   BrowserRouter as Router,
