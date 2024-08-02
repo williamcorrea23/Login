@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Redacao.css'; // Importe o arquivo CSS
+import './redacao.css'; // Importe o arquivo CSS
 import axios from 'axios';
 
 const Redacao = ({ navigation }) => {
