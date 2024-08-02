@@ -13,14 +13,7 @@ const Chatbot = () => {
   const navigate = useNavigate();
   const { topic, type } = location.state;
 
-   // Defina as variáveis lessons e exercises aqui
-  const lessons = {
-    // Defina seus dados de aulas aqui
-  };
 
-  const exercises = {
-    // Defina seus dados de exercícios aqui
-  };
 
   useEffect(() => {
     if (type === 'lesson' && lessons[topic]) {
