@@ -41,16 +41,16 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={user ? <Navigate to="/dashboard" /> : <login />}
+                element={user ? <Navigate to="/Dashboard" /> : <login />}
               />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/lessons" element={<Lessons />} />
-              <Route path="/exercises" element={<Exercises />} />
-              <Route path="/chatbot" element={<Chatbot />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/redacao" element={<Redacao />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/Lessons" element={<Lessons />} />
+              <Route path="/Exercises" element={<Exercises />} />
+              <Route path="/Chatbot" element={<Chatbot />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/redacao" element={<redacao />} />
               </Routes>
             <ToastContainer />
           </div>
