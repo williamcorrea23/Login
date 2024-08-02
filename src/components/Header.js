@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Icon from 'react-icons/fa';    
+//import Icon from 'react-icons/fa';    
 //'react-native-vector-icons/FontAwesome';
 
 const Header = ({ title }) => {
   return (
     <View style={styles.header}>
       <Text style={styles.title}>{title}</Text>
-      <Icon name="bars" size={24} color="white" />
+  //<Icon name="bars" size={24} color="white" />
     </View>
   );
 };
