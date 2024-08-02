@@ -225,4 +225,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Redacao;
+export default redacao;
