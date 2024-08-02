@@ -10,6 +10,8 @@ import {
 
 import Login from "./components/login";
 import SignUp from "./components/register";
+import exemplo from "./components/exemplo";
+
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,7 +34,7 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={user ? <Navigate to="/profile" /> : <Login />}
+                element={user ? <Navigate to="/exemplo" /> : <Login />}
               />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
