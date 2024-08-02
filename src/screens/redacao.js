@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Switch, Alert } from 'react-native';
+import './Redacao.css'; // Importe o arquivo CSS
 import axios from 'axios';
 
 const Redacao = ({ navigation }) => {
@@ -12,7 +12,6 @@ const Redacao = ({ navigation }) => {
   const [analysisResult, setAnalysisResult] = useState(null);
 
   useEffect(() => {
-    // Simulação de carregamento de temas anteriores do ENEM
     const mockTemas = [
       'Tema 1: Tecnologia e Sociedade',
       'Tema 2: Meio Ambiente e Sustentabilidade',
@@ -34,7 +33,7 @@ const Redacao = ({ navigation }) => {
           }
           return prevCountdown - 1;
         });
-      }, 60000); // 60000 milissegundos = 1 minuto
+      }, 60000);
     } else {
       clearInterval(interval);
     }
@@ -44,18 +43,17 @@ const Redacao = ({ navigation }) => {
   const handleSubmit = async () => {
     const lines = conteudo.split('\n').filter(line => line.trim() !== '');
     if (lines.length < 7) {
-      Alert.alert('Erro', 'A redação deve ter pelo menos 7 linhas.');
+      alert('Erro: A redação deve ter pelo menos 7 linhas.');
       return;
     }
     if (lines.length > 30) {
-      Alert.alert('Erro', 'A redação deve ter no máximo 30 linhas.');
+      alert('Erro: A redação deve ter no máximo 30 linhas.');
       return;
     }
 
-    // Lógica para enviar a redação para análise usando ChatGPT
     const analysis = await analyzeRedacao(conteudo);
     setAnalysisResult(analysis);
-    Alert.alert('Sucesso', 'Redação enviada para análise!');
+    alert('Sucesso: Redação enviada para análise!');
   };
 
   const analyzeRedacao = async (conteudo) => {
@@ -96,133 +94,65 @@ const Redacao = ({ navigation }) => {
   };
 
   return (
-    <View style={[styles.container, darkMode && styles.darkMode]}>
-      <View style={styles.toggleContainer}>
-        <Text style={styles.toggleText}>Alternar Tema Escuro</Text>
-        <Switch
-          value={darkMode}
-          onValueChange={setDarkMode}
-          trackColor={{ false: '#767577', true: '#81b0ff' }}
-          thumbColor={darkMode ? '#f5dd4b' : '#f4f3f4'}
-        />
-      </View>
-      <Text style={styles.title}>Redação do ENEM</Text>
-      <View style={styles.instructions}>
-        <Text><strong>Instruções:</strong></Text>
-        <Text>1. Escreva seu rascunho no espaço abaixo.</Text>
-        <Text>2. O texto final deve ter até 30 linhas.</Text>
-        <Text>3. Cópias de textos serão desconsideradas.</Text>
-        <Text>4. Receberá nota zero se:</Text>
-        <Text>- Tiver menos de 7 linhas.</Text>
-        <Text>- Fugir do tema ou não for dissertativo-argumentativo.</Text>
-        <Text>- Tiver partes desconectadas do tema.</Text>
-      </View>
-      <View style={styles.formGroup}>
-        <Text>Temas Anteriores do ENEM:</Text>
+    <div className={`container ${darkMode ? 'darkMode' : ''}`}>
+      <div className="toggleContainer">
+        <span className="toggleText">Alternar Tema Escuro</span>
+        <label className="switch">
+          <input type="checkbox" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+          <span className="slider round"></span>
+        </label>
+      </div>
+      <h1 className="title">Redação do ENEM</h1>
+      <div className="instructions">
+        <strong>Instruções:</strong>
+        <p>1. Escreva seu rascunho no espaço abaixo.</p>
+        <p>2. O texto final deve ter até 30 linhas.</p>
+        <p>3. Cópias de textos serão desconsideradas.</p>
+        <p>4. Receberá nota zero se:</p>
+        <p>- Tiver menos de 7 linhas.</p>
+        <p>- Fugir do tema ou não for dissertativo-argumentativo.</p>
+        <p>- Tiver partes desconectadas do tema.</p>
+      </div>
+      <div className="formGroup">
+        <p>Temas Anteriores do ENEM:</p>
         {temas.map((tema, index) => (
-          <Text key={index}>{tema}</Text>
+          <p key={index}>{tema}</p>
         ))}
-      </View>
-      <TextInput
-        style={styles.input}
+      </div>
+      <input
+        className="input"
         placeholder="Título"
         value={titulo}
-        onChangeText={setTitulo}
+        onChange={(e) => setTitulo(e.target.value)}
       />
-      <TextInput
-        style={styles.textarea}
+      <textarea
+        className="textarea"
         placeholder="Conteúdo"
-        multiline
-        numberOfLines={10}
+        rows="10"
         value={conteudo}
-        onChangeText={setConteudo}
+        onChange={(e) => setConteudo(e.target.value)}
       />
-      <Button title="Enviar para Análise" onPress={handleSubmit} color="#009739" />
+      <button className="button" onClick={handleSubmit}>Enviar para Análise</button>
       {analysisResult && (
-        <View style={styles.analysisResult}>
-          <Text style={styles.analysisTitle}>Análise da Redação:</Text>
-          <Text>{analysisResult}</Text>
-        </View>
+        <div className="analysisResult">
+          <h2 className="analysisTitle">Análise da Redação:</h2>
+          <p>{analysisResult}</p>
+        </div>
       )}
-      <View style={styles.timer}>
-        <Text>Definir contagem regressiva (minutos):</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          value={countdown.toString()}
-          onChangeText={text => setCountdown(parseInt(text, 10))}
+      <div className="timer">
+        <p>Definir contagem regressiva (minutos):</p>
+        <input
+          className="input"
+          type="number"
+          value={countdown}
+          onChange={(e) => setCountdown(parseInt(e.target.value, 10))}
         />
-        <Button title="Iniciar" onPress={startTimer} color="#009739" />
-        <Text>{countdown} minutos restantes</Text>
-      </View>
-      <Button title="Voltar" onPress={() => navigation.goBack()} color="#009739" />
-    </View>
+        <button className="button" onClick={startTimer}>Iniciar</button>
+        <p>{countdown} minutos restantes</p>
+      </div>
+      <button className="button" onClick={() => navigation.goBack()}>Voltar</button>
+    </div>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f0f0f0',
-  },
-  darkMode: {
-    backgroundColor: '#181818',
-    color: '#f8f8f8',
-  },
-  toggleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginBottom: 20,
-  },
-  toggleText: {
-    marginRight: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  instructions: {
-    marginBottom: 20,
-  },
-  formGroup: {
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-  textarea: {
-    height: 200,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    textAlignVertical: 'top',
-  },
-  timer: {
-    marginTop: 20,
-  },
-  analysisResult: {
-    marginTop: 20,
-    padding: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-  analysisTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-});
-
-export default redacao;
+export default Redacao;
