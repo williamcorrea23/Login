@@ -12,7 +12,6 @@ import Login from "./components/login";
 import SignUp from "./components/register";
 import exemplo from "./components/exemplo";
 
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./components/profile";
