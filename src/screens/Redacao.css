@@ -1,0 +1,131 @@
+.container {
+  padding: 20px;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container.darkMode {
+  background-color: #181818;
+  color: #f8f8f8;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.toggleText {
+  margin-right: 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.instructions {
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.button {
+  background-color: #009739;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  background-color: #007a31;
+}
+
+.timer {
+  margin-top: 20px;
+}
+
+.analysisResult {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.analysisTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
