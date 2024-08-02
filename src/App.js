@@ -8,7 +8,7 @@ import Lessons from './screens/Lessons';
 import Exercises from './screens/Exercises';
 import Chatbot from './components/Chatbot';
 import Profile from './screens/Profile';
-import Redacao from './screens/redacao';
+import redacao from './screens/redacao';
 import {
   BrowserRouter as Router,
   Routes,
@@ -50,6 +50,7 @@ function App() {
               <Route path="/Exercises" element={<Exercises />} />
               <Route path="/Chatbot" element={<Chatbot />} />
               <Route path="/Profile" element={<Profile />} />
+              <Route path="/Header" element={<Header />} />
               <Route path="/redacao" element={<redacao />} />
               </Routes>
             <ToastContainer />
