@@ -47,14 +47,14 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={user ? <Navigate to="/Header" /> : <Header />}
+                element={user ? <Navigate to="/redacao" /> : <redacao />}
               />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/lessons" element={<Lessons />} />
               <Route path="/exercises" element={<Exercises />} />
-              <Route path="/chatbot" element={<Chatbot />} />
+              //<Route path="/chatbot" element={<Chatbot />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/redacao" element={<Redacao />} />
               </Routes>
