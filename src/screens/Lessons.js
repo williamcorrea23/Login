@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import './Lessons.css'; // Importe o arquivo CSS
+import { useNavigate } from 'react-router-dom';
 
 const lessons = {
   'Matemática': {
@@ -91,61 +91,28 @@ const lessons = {
 };
 
 const Lessons = () => {
-  const navigation = useNavigation();
+  const navigate = useNavigate();
 
   const showChat = (topic, type = 'lesson') => {
-    navigation.navigate('Chatbot', { topic, type });
+    navigate('/chatbot', { state: { topic, type } });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Aulas</Text>
+    <div className="container">
+      <h1 className="title">Aulas</h1>
       {Object.keys(lessons).map((topic) => (
-        <TouchableOpacity
+        <div
           key={lessons[topic].id}
-          style={styles.lessonItem}
-          onPress={() => showChat(topic, 'lesson')}
+          className="lessonItem"
+          onClick={() => showChat(topic, 'lesson')}
         >
-          <Text style={styles.lessonTitle}>{lessons[topic].title}</Text>
-          <Text style={styles.lessonDetails}>{lessons[topic].details}</Text>
-        </TouchableOpacity>
+          <h2 className="lessonTitle">{lessons[topic].title}</h2>
+          <p className="lessonDetails">{lessons[topic].details}</p>
+        </div>
       ))}
-      <Button title="Voltar" onPress={() => navigation.goBack()} color="#009739" />
-    </View>
+      <button className="button" onClick={() => navigate(-1)}>Voltar</button>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f0f0f0',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  lessonItem: {
-    marginBottom: 20,
-    padding: 10,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  lessonTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  lessonDetails: {
-    fontSize: 16,
-  },
-});
 
 export default Lessons;
