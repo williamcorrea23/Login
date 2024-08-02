@@ -28,9 +28,10 @@ import { auth } from "./components/firebase";
 function App() {
   const [user, setUser] = useState();
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) =>{
+    auth.onAuthStateChanged((user) => {
       setUser(user);
     });
+  });
 
     return () => unsubscribe(); // Cleanup subscription on unmount
   }, []);
