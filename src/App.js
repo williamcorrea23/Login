@@ -6,11 +6,11 @@ import "./App.css";
 //import { createStackNavigator } from '@react-navigation/stack';
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
-//import Dashboard from './screens/Dashboard';
-//import Lessons from './screens/Lessons';
+import Dashboard from './screens/Dashboard';
+import Lessons from './screens/Lessons';
 import Exercises from './screens/Exercises';
-//import Chatbot from './components/Chatbot';
-//import Profile from './screens/Profile';
+import Chatbot from './components/Chatbot';
+import Profile from './screens/Profile';
 import Redacao from './screens/redacao';
 import {
   BrowserRouter as Router,
