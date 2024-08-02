@@ -24,7 +24,7 @@ import SignUp from "./components/register";
 import { FaFontAwesome } from 'react-icons/fa';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import Profile from "./components/profile";
+import Profile from "./components/profile";
 import { useState } from "react";
 import { auth } from "./components/firebase";
 
