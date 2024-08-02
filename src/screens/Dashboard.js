@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // Importe o arquivo CSS
 
-const Dashboard = ({ navigation }) => {
+const Dashboard = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <h1 className="title">Painel de Controle</h1>
