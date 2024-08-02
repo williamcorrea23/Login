@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Chatbot.css'; // Importe o arquivo CSS
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import lessons from './screens/lessons'; // Importe o arquivo lessons.js
-import exercises from './screens/exercises'; // Importe o arquivo exercises.js
+import lessons from './screens/Lessons'; // Importe o arquivo lessons.js
+import exercises from './screens/Exercises'; // Importe o arquivo exercises.js
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
