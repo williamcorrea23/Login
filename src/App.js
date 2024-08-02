@@ -40,9 +40,7 @@ function App() {
           <div className="auth-inner">
             <Routes>
               <Route
-                path="/"
-                element={user ? <Navigate to="/Dashboard" /> : <login />}
-              />
+                 <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
               <Route path="/Dashboard" element={<Dashboard />} />
@@ -50,7 +48,7 @@ function App() {
               <Route path="/Exercises" element={<Exercises />} />
               <Route path="/Chatbot" element={<Chatbot />} />
               <Route path="/Profile" element={<Profile />} />
-              <Route path="/Header" element={<Header />} />
+             
               <Route path="/redacao" element={<redacao />} />
               </Routes>
             <ToastContainer />
