@@ -25,8 +25,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { auth } from "./components/firebase";
 
-const Stack = createStackNavigator();
-
 function App() {
   const [user, setUser] = useState();
   useEffect(() => {
