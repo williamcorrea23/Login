@@ -24,7 +24,7 @@ import SignUp from "./components/register";
 import { FaFontAwesome } from 'react-icons/fa';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Profile from "./components/profile";
+
 import { useState } from "react";
 import { auth } from "./components/firebase";
 
@@ -54,7 +54,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/lessons" element={<Lessons />} />
               <Route path="/exercises" element={<Exercises />} />
-              //<Route path="/chatbot" element={<Chatbot />} />
+              <Route path="/chatbot" element={<Chatbot />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/redacao" element={<Redacao />} />
               </Routes>
