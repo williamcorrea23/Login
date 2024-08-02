@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Chatbot.css'; // Importe o arquivo CSS
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import lessons from './lessons'; // Importe o arquivo lessons.js
+import exercises from './exercises'; // Importe o arquivo exercises.js
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -10,6 +12,15 @@ const Chatbot = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { topic, type } = location.state;
+
+   // Defina as variáveis lessons e exercises aqui
+  const lessons = {
+    // Defina seus dados de aulas aqui
+  };
+
+  const exercises = {
+    // Defina seus dados de exercícios aqui
+  };
 
   useEffect(() => {
     if (type === 'lesson' && lessons[topic]) {
