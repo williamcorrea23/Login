@@ -33,8 +33,6 @@ function App() {
     });
   });
 
-    return () => unsubscribe(); // Cleanup subscription on unmount
-  }, []);
   return (
     <Router>
       <div className="App">
