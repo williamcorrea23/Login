@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TextInput, Picker, ScrollView } from 'react-native';
+import './Exercises.css'; // Importe o arquivo CSS
 import axios from 'axios';
 
 const Exercises = ({ navigation }) => {
@@ -70,97 +70,56 @@ const Exercises = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Gerador de Questões</Text>
-      <Picker
-        selectedValue={subject}
-        style={styles.picker}
-        onValueChange={(itemValue) => setSubject(itemValue)}
+    <div className="container">
+      <h1 className="title">Gerador de Questões</h1>
+      <select
+        value={subject}
+        onChange={(e) => setSubject(e.target.value)}
+        className="picker"
       >
-        <Picker.Item label="Ciências Humanas" value="Ciências Humanas" />
-        <Picker.Item label="Ciências Naturais" value="Ciências Naturais" />
-        <Picker.Item label="Linguagens" value="Linguagens" />
-        <Picker.Item label="Matemática" value="Matemática" />
-        <Picker.Item label="Língua Inglesa" value="Língua Inglesa" />
-        <Picker.Item label="Língua Espanhola" value="Língua Espanhola" />
-        <Picker.Item label="Redação" value="Redação" />
-      </Picker>
-      <TextInput
-        style={styles.input}
+        <option value="Ciências Humanas">Ciências Humanas</option>
+        <option value="Ciências Naturais">Ciências Naturais</option>
+        <option value="Linguagens">Linguagens</option>
+        <option value="Matemática">Matemática</option>
+        <option value="Língua Inglesa">Língua Inglesa</option>
+        <option value="Língua Espanhola">Língua Espanhola</option>
+        <option value="Redação">Redação</option>
+      </select>
+      <input
+        type="number"
         placeholder="Número de Questões"
-        keyboardType="numeric"
         value={numQuestions}
-        onChangeText={setNumQuestions}
+        onChange={(e) => setNumQuestions(e.target.value)}
+        className="input"
       />
-      <Button title="Gerar Questões" onPress={generateQuestions} color="#009739" />
+      <button onClick={generateQuestions} className="button">Gerar Questões</button>
       {questions.length > 0 && (
-        <View>
+        <div>
           {questions.map(q => (
-            <View key={q.id} style={styles.questionContainer}>
-              <Text style={styles.questionText}>{q.question}</Text>
+            <div key={q.id} className="questionContainer">
+              <p className="questionText">{q.question}</p>
               {q.options.map(option => (
-                <Button
+                <button
                   key={option}
-                  title={option}
-                  onPress={() => setAnswers({ ...answers, [q.id]: option })}
-                  color="#009739"
-                />
+                  onClick={() => setAnswers({ ...answers, [q.id]: option })}
+                  className="button"
+                >
+                  {option}
+                </button>
               ))}
-            </View>
+            </div>
           ))}
-          <Button title="Enviar Respostas" onPress={submitAnswers} color="#009739" />
-        </View>
+          <button onClick={submitAnswers} className="button">Enviar Respostas</button>
+        </div>
       )}
       {results && (
-        <View style={styles.resultsContainer}>
-          <Text style={styles.resultsText}>{results}</Text>
-        </View>
+        <div className="resultsContainer">
+          <p className="resultsText">{results}</p>
+        </div>
       )}
-      <Button title="Voltar" onPress={() => navigation.goBack()} color="#009739" />
-    </ScrollView>
+      <button onClick={() => navigation.goBack()} className="button">Voltar</button>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f0f0f0',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  picker: {
-    height: 50,
-    width: '100%',
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-  questionContainer: {
-    marginBottom: 20,
-  },
-  questionText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  resultsContainer: {
-    marginTop: 20,
-  },
-  resultsText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
 
 export default Exercises;
