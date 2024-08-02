@@ -28,15 +28,33 @@ import { useState } from "react";
 import { auth } from "./components/firebase";
 
 const Stack = createStackNavigator();
-const App = () => {
+
+function App() {
+  const [user, setUser] = useState();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  });
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={LoginForm}
-          options={{ headerShown: false }}
-        />
+    <Router>
+      <div className="App">
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Routes>
+              <Route
+                path="/"
+                element={user ? <Navigate to="/Header" /> : <Header />}
+              />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<SignUp />} />
+              </Routes>
+            <ToastContainer />
+          </div>
+        </div>
+      </div>
+    </Router>
+
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
@@ -69,35 +87,6 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-};
-
-function App() {
-  const [user, setUser] = useState();
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-  });
-  return (
-    <Router>
-      <div className="App">
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Routes>
-              <Route
-                path="/"
-                element={user ? <Navigate to="/Header" /> : <Header />}
-              />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<SignUp />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-            <ToastContainer />
-          </div>
-        </div>
-      </div>
-    </Router>
   );
 }
 
