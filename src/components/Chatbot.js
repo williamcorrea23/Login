@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import './Chatbot.css'; // Importe o arquivo CSS
 import axios from 'axios';
-import { useRoute } from '@react-navigation/native';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Chatbot = ({ navigation }) => {
+const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
-  const flatListRef = useRef();
-  const route = useRoute();
-  const { topic, type } = route.params;
+  const messagesEndRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { topic, type } = location.state;
 
   useEffect(() => {
     if (type === 'lesson' && lessons[topic]) {
@@ -19,6 +20,10 @@ const Chatbot = ({ navigation }) => {
       setMessages([{ text: 'Erro: Tópico ou tipo selecionado inválido.', sender: 'bot' }]);
     }
   }, [topic, type]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const sendMessage = async () => {
     if (userInput.trim() === '') return;
@@ -65,66 +70,27 @@ const Chatbot = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        ref={flatListRef}
-        data={messages}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={item.sender === 'bot' ? styles.botMessage : styles.userMessage}>
-            <Text>{item.text}</Text>
-          </View>
-        )}
-        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
-      />
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
+    <div className="container">
+      <div className="messagesContainer">
+        {messages.map((message, index) => (
+          <div key={index} className={message.sender === 'bot' ? 'botMessage' : 'userMessage'}>
+            <p>{message.text}</p>
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+      <div className="inputContainer">
+        <input
+          className="input"
           value={userInput}
-          onChangeText={setUserInput}
+          onChange={(e) => setUserInput(e.target.value)}
           placeholder="Digite uma mensagem..."
         />
-        <Button title="Enviar" onPress={sendMessage} color="#009739" />
-      </View>
-      <Button title="Voltar" onPress={() => navigation.goBack()} color="#009739" />
-    </View>
+        <button className="button" onClick={sendMessage}>Enviar</button>
+      </div>
+      <button className="button" onClick={() => navigate(-1)}>Voltar</button>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  botMessage: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    maxWidth: '80%',
-  },
-  userMessage: {
-    alignSelf: 'flex-end',
-    backgroundColor: '#d0e0f0',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    maxWidth: '80%',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginRight: 10,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-});
 
 export default Chatbot;
