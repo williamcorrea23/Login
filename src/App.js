@@ -23,7 +23,7 @@ import SignUp from "./components/register";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Profile from "./components/profile";
+//import Profile from "./components/profile";
 import { useState } from "react";
 import { auth } from "./components/firebase";
 
