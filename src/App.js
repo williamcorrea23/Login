@@ -28,7 +28,7 @@ import { auth } from "./components/firebase";
 function App() {
   const [user, setUser] = useState();
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) =>{
       setUser(user);
     });
 
