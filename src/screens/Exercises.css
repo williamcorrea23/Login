@@ -1,0 +1,64 @@
+.container {
+  padding: 20px;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.picker {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input {
+  height: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: #009739;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #007a31;
+}
+
+.questionContainer {
+  margin-bottom: 20px;
+}
+
+.questionText {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.resultsContainer {
+  margin-top: 20px;
+}
+
+.resultsText {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
