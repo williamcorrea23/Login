@@ -20,7 +20,7 @@ import {
 
 import Login from "./components/login";
 import SignUp from "./components/register";
-
+import { FaFontAwesome } from 'react-icons/fa';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //import Profile from "./components/profile";
