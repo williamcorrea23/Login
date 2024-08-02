@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import './LoginForm.css'; // Importe o arquivo CSS
 
 const LoginForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -7,51 +7,29 @@ const LoginForm = ({ navigation }) => {
 
   const handleLogin = () => {
     // Lógica de autenticação aqui
-    navigation.navigate('Dashboard');
+    navigation('/dashboard');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login no E-Learning Brasil</Text>
-      <TextInput
-        style={styles.input}
+    <div className="container">
+      <h1 className="title">Login no E-Learning Brasil</h1>
+      <input
+        className="input"
+        type="email"
         placeholder="Email"
         value={email}
-        onChangeText={setEmail}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <TextInput
-        style={styles.input}
+      <input
+        className="input"
+        type="password"
         placeholder="Senha"
-        secureTextEntry
         value={password}
-        onChangeText={setPassword}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <Button title="Entrar" onPress={handleLogin} color="#009739" />
-    </View>
+      <button className="button" onClick={handleLogin}>Entrar</button>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#f0f0f0',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-});
 
 export default LoginForm;
