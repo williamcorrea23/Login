@@ -39,15 +39,17 @@ function App() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Routes>
-            
-                 <Route path="/" element={<Dashboard />} />
+               <Route
+                path="/"
+                element={user ? <Navigate to="/profile" /> : <Login />}
+              />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
               <Route path="/Dashboard" element={<Dashboard />} />
               <Route path="/Lessons" element={<Lessons />} />
               <Route path="/Exercises" element={<Exercises />} />
               <Route path="/Chatbot" element={<Chatbot />} />
-              <Route path="/Profile" element={<Profile />} />
+
              
               <Route path="/redacao" element={<redacao />} />
               </Routes>
