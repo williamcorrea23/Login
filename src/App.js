@@ -35,7 +35,9 @@ function App() {
     auth.onAuthStateChanged((user) => {
       setUser(user);
     });
-  });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
   return (
     <Router>
       <div className="App">
@@ -48,6 +50,12 @@ function App() {
               />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/lessons" element={<Lessons />} />
+              <Route path="/exercises" element={<Exercises />} />
+              <Route path="/chatbot" element={<Chatbot />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/redacao" element={<Redacao />} />
               </Routes>
             <ToastContainer />
           </div>
@@ -55,38 +63,7 @@ function App() {
       </div>
     </Router>
 
-        <Stack.Screen
-          name="Dashboard"
-          component={Dashboard}
-          options={{ header: () => <Header title="ENEM Wise E-Learning Brasil" /> }}
-        />
-        <Stack.Screen
-          name="Lessons"
-          component={Lessons}
-          options={{ header: () => <Header title="Aulas" /> }}
-        />
-        <Stack.Screen
-          name="Exercises"
-          component={Exercises}
-          options={{ header: () => <Header title="Exercícios" /> }}
-        />
-        <Stack.Screen
-          name="Chatbot"
-          component={Chatbot}
-          options={{ header: () => <Header title="Chatbot" /> }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{ header: () => <Header title="Perfil" /> }}
-        />
-        <Stack.Screen
-          name="Redacao"
-          component={Redacao}
-          options={{ header: () => <Header title="Redação" /> }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+       
   );
 }
 
