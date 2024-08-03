@@ -7,6 +7,7 @@ import { auth } from './components/firebase';
 import Login from './components/login';
 import SignUp from './components/register';
 import Profile from './components/profile';
+import './styles/custom-tailwind.css';
 import './styles/globals.css';
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
