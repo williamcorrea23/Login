@@ -1,0 +1,118 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Estilos globais */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Estilos para o container principal */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilos para o header */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* Estilos para o main content */
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Estilos para o footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Estilos para formulários */
+input, textarea, select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilos para botões */
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para mensagens de erro */
+.error-message {
+  color: #ff0000;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para mensagens de sucesso */
+.success-message {
+  color: #008000;
+  margin-bottom: 1rem;
+}
+
+/* Estilos específicos para o App.jsx */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-inner {
+  width: 300px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-inner h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.auth-inner form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-inner input {
+  margin-bottom: 1rem;
+}
+
+.auth-inner button {
+  margin-top: 1rem;
+}
