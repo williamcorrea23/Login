@@ -1,46 +1,31 @@
-/* Reset básico */
+/* Reset de Estilos */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* Estilos globais */
+/* Estilos Globais */
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f4f4f4;
   color: #333;
-  line-height: 1.6;
 }
 
-/* Estilos do header */
-header {
+/* Navbar */
+nav {
   background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-logo {
-  display: flex;
-  align-items: center;
-}
-
-.header-logo img {
-  width: 40px;
-  height: auto;
-  margin-right: 10px;
+  padding: 10px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
+  justify-content: center;
 }
 
 nav ul li {
-  margin-right: 15px;
+  margin: 0 15px;
 }
 
 nav ul li a {
@@ -53,7 +38,20 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Estilos da seção */
+/* Logo do Cabeçalho */
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo img {
+  width: 40px;
+  height: auto;
+}
+
+/* Seções */
 .section {
   display: none;
   padding: 20px;
@@ -63,7 +61,7 @@ nav ul li a:hover {
   display: block;
 }
 
-/* Estilos do grid */
+/* Grid */
 .grid {
   display: grid;
   gap: 10px;
@@ -77,86 +75,39 @@ nav ul li a:hover {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* Estilos de botões */
+/* Estilos para Componentes */
+.dashboard, .lessons, .exercises, .chatbot {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+/* Botões */
 button {
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
-  padding: 10px 15px;
   border-radius: 5px;
+  padding: 10px 15px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
-/* Estilos de formulários */
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Estilos para dispositivos móveis */
+/* Responsividade */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   nav ul {
     flex-direction: column;
-    margin-top: 10px;
-  }
-
-  nav ul li {
-    margin-bottom: 10px;
   }
 
   .grid {
-    grid-template-columns: 1fr; /* Uma coluna em dispositivos móveis */
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
   }
 
-  .section {
-    padding: 10px; /* Menos padding em dispositivos móveis */
-  }
-
-  button {
-    width: 100%; /* Botões ocupam toda a largura */
-  }
-}
-
-/* Estilos para telas menores */
-@media (max-width: 480px) {
-  .header-logo img {
-    width: 30px; /* Reduzir o tamanho do logo */
-  }
-
-  nav ul li {
-    margin-right: 5px;
-    margin-bottom: 5px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    padding: 8px; /* Menos padding em campos de entrada */
-  }
-
-  button {
-    padding: 8px 10px; /* Menos padding em botões */
+  .header-logo {
+    flex-direction: column;
   }
 }
