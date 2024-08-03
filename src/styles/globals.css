@@ -1,14 +1,20 @@
-/* Global Styles */
-body {
+/* Reset básico */
+* {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f4f4f4; /* Cor de fundo neutra */
-  color: #333; /* Cor do texto */
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Header Styles */
+/* Estilos globais */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Estilos do cabeçalho */
 header {
-  background-color: #4CAF50; /* Cor verde para o cabeçalho */
+  background-color: #007bff;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -26,80 +32,81 @@ header {
   margin-right: 10px;
 }
 
-nav {
-  display: flex;
-}
-
 nav ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
 }
 
 nav ul li {
-  margin-right: 15px; /* Espaçamento entre os itens do menu */
+  margin-right: 15px;
 }
 
 nav ul li a {
-  color: #fff; /* Cor do texto do menu */
+  color: #fff;
   text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Efeito hover */
+  text-decoration: underline;
 }
 
-/* Section Styles */
+/* Estilos de seção */
 .section {
   display: none;
+  padding: 20px;
 }
 
 .section.active {
   display: block;
-  padding: 20px;
 }
 
-/* Grid Styles */
+/* Estilos de grid */
 .grid {
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 }
 
-.grid-cols-1 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-.md\:grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-/* Button Styles */
+/* Estilos de botões */
 button {
-  background-color: #4CAF50; /* Cor verde para botões */
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #45a049; /* Efeito hover para botões */
+  background-color: #0056b3;
 }
 
-/* Responsive Styles */
-@media (max-width: 600px) {
+/* Responsividade */
+@media (max-width: 768px) {
   nav ul {
-    flex-direction: column; /* Menu em coluna em telas pequenas */
-    align-items: flex-start;
+    flex-direction: column;
   }
 
   nav ul li {
-    margin-bottom: 10px; /* Espaçamento entre itens do menu */
+    margin-bottom: 10px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-logo {
+    margin-bottom: 10px;
   }
 }
