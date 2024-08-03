@@ -1,31 +1,26 @@
-/* Reset de Estilos */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 /* Estilos Globais */
 body {
+  margin: 0;
   font-family: 'Roboto', sans-serif;
   background-color: #f4f4f4;
   color: #333;
 }
 
-/* Navbar */
+/* Estilos do Navegador */
 nav {
-  background-color: #007bff;
+  background-color: #007bff; /* Cor do tema */
   padding: 10px;
 }
 
 nav ul {
   list-style: none;
+  padding: 0;
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Centraliza os itens do menu */
 }
 
 nav ul li {
-  margin: 0 15px;
+  margin: 0 15px; /* Espaçamento uniforme entre os itens */
 }
 
 nav ul li a {
@@ -38,7 +33,7 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Logo do Cabeçalho */
+/* Estilos do Logo */
 .header-logo {
   display: flex;
   justify-content: center;
@@ -51,17 +46,17 @@ nav ul li a:hover {
   height: auto;
 }
 
-/* Seções */
+/* Estilos das Seções */
 .section {
   display: none;
-  padding: 20px;
 }
 
 .section.active {
   display: block;
+  padding: 20px;
 }
 
-/* Grid */
+/* Estilos de Grid */
 .grid {
   display: grid;
   gap: 10px;
@@ -75,21 +70,13 @@ nav ul li a:hover {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* Estilos para Componentes */
-.dashboard, .lessons, .exercises, .chatbot {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-}
-
-/* Botões */
+/* Estilos de Botões */
 button {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
   padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -97,17 +84,17 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Responsividade */
+/* Estilos Responsivos */
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: column; /* Menu em coluna em telas menores */
+  }
+
+  nav ul li {
+    margin: 5px 0; /* Espaçamento reduzido em telas menores */
   }
 
   .grid {
     grid-template-columns: 1fr; /* Uma coluna em telas menores */
-  }
-
-  .header-logo {
-    flex-direction: column;
   }
 }
