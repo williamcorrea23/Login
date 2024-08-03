@@ -1,39 +1,24 @@
-/* Estilos Globais */
-body {
+/* Reset básico */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos globais */
+body {
   font-family: 'Roboto', sans-serif;
   background-color: #f4f4f4;
   color: #333;
 }
 
-/* Estilos do Navegador */
-nav {
-  background-color: #007bff; /* Cor do tema */
-  padding: 10px;
+/* Estilos do cabeçalho */
+header {
+  background-color: #007bff;
+  padding: 15px;
+  text-align: center;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center; /* Centraliza os itens do menu */
-}
-
-nav ul li {
-  margin: 0 15px; /* Espaçamento uniforme entre os itens */
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Estilos do Logo */
 .header-logo {
   display: flex;
   justify-content: center;
@@ -46,36 +31,55 @@ nav ul li a:hover {
   height: auto;
 }
 
-/* Estilos das Seções */
+/* Navegação */
+nav {
+  margin: 10px 0;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Seções */
 .section {
   display: none;
+  padding: 20px;
 }
 
 .section.active {
   display: block;
-  padding: 20px;
 }
 
-/* Estilos de Grid */
+/* Grid */
 .grid {
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 }
 
-.grid-cols-1 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-.md\:grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-/* Estilos de Botões */
+/* Botões */
 button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -84,17 +88,30 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Estilos Responsivos */
+/* Formulários */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column; /* Menu em coluna em telas menores */
+    flex-direction: column;
   }
 
   nav ul li {
-    margin: 5px 0; /* Espaçamento reduzido em telas menores */
+    margin: 5px 0;
+  }
+
+  .header-logo {
+    flex-direction: column;
   }
 
   .grid {
-    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
   }
 }
