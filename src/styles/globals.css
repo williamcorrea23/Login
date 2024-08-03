@@ -1,23 +1,34 @@
 /* Global Styles */
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f5f5f5;
+  background: #f9f9f9;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Header Styles */
 header {
   width: 100%;
   padding: 1rem;
-  background-color: #6200ea;
+  background: #1e66a5; /* Color inspired by ENEM logo */
   color: white;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
 /* Main Container */
@@ -25,9 +36,9 @@ header {
   flex: 1;
   width: 100%;
   max-width: 600px;
-  margin: 1rem auto;
+  margin: 2rem auto;
   padding: 1rem;
-  background-color: #ffffff;
+  background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
@@ -38,8 +49,8 @@ header {
 }
 
 .section h2 {
-  margin-top: 0;
-  color: #6200ea;
+  margin-bottom: 1rem;
+  color: #1e66a5; /* Same inspired color */
 }
 
 /* Navigation */
@@ -47,7 +58,7 @@ header {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
-  background-color: #6200ea;
+  background: #1e66a5; /* Same inspired color */
   color: white;
   position: fixed;
   bottom: 0;
@@ -58,17 +69,14 @@ header {
 .navbar a {
   color: white;
   text-decoration: none;
+  font-size: 1rem;
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
   .main-container {
     padding: 0.5rem;
-    margin: 0.5rem;
-  }
-
-  .section {
-    margin-bottom: 1rem;
+    margin: 1rem 0.5rem;
   }
 
   header {
@@ -89,21 +97,27 @@ header {
 
 .dashboard-stats {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
   margin: 1rem 0;
 }
 
 .stat-box {
-  background: #e0e0e0;
+  background: #e3f2fd;
+  color: #1e66a5;
   padding: 1rem;
   border-radius: 8px;
   text-align: center;
+  flex: 1;
+  margin: 0.5rem;
+  max-width: 100px;
 }
 
 /* Lessons Styles */
 .lessons .lesson {
-  background: #e0e0e0;
+  background: #e3f2fd;
+  color: #1e66a5;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -114,7 +128,8 @@ header {
 .exercise {
   margin-bottom: 1rem;
   padding: 1rem;
-  background: #e0e0e0;
+  background: #e3f2fd;
+  color: #1e66a5;
   border-radius: 8px;
 }
 
@@ -135,19 +150,21 @@ header {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 1rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 .redacao-form button {
   padding: 1rem;
-  background-color: #6200ea;
+  background: #1e66a5;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .redacao-form button:hover {
-  background-color: #3700b3;
+  background: #144a74;
 }
 
 /* Chatbot Styles */
@@ -165,22 +182,25 @@ header {
   flex: 1;
   padding: 1rem;
   overflow-y: scroll;
+  background: #f1f1f1;
 }
 
 .message {
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 8px;
+  max-width: 80%;
 }
 
 .message.user {
-  background-color: #c5e1a5;
+  background: #c8e6c9;
   align-self: flex-end;
 }
 
 .message.bot {
-  background-color: #e0e0e0;
+  background: white;
   align-self: flex-start;
+  border: 1px solid #ccc;
 }
 
 .message-input {
@@ -197,14 +217,15 @@ header {
 
 .message-input button {
   padding: 1rem;
-  background-color: #6200ea;
+  background: #1e66a5;
   color: white;
   border: none;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .message-input button:hover {
-  background-color: #3700b3;
+  background: #144a74;
 }
 
 /* Profile Styles */
@@ -214,13 +235,14 @@ header {
 
 .profile-container button {
   padding: 1rem;
-  background-color: #6200ea;
+  background: #1e66a5;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .profile-container button:hover {
-  background-color: #3700b3;
+  background: #144a74;
 }
