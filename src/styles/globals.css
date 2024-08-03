@@ -1,15 +1,11 @@
-/* Reset CSS */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Estilos Globais */
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
   background-color: #f9f9f9;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 header {
@@ -25,6 +21,7 @@ header {
 header h1 {
   font-size: 1.5rem;
   color: #ffffff;
+  margin: 0;
 }
 
 header button {
@@ -32,6 +29,7 @@ header button {
   background: none;
   color: #ffffff;
   cursor: pointer;
+  font-size: 1.5rem;
 }
 
 .content {
@@ -153,18 +151,48 @@ button:hover {
 /* Responsividade */
 @media (max-width: 640px) {
   header {
-    padding: 1rem;
-  }
-
-  .card, .section {
-    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
   }
 
   header h1 {
     font-size: 1.2rem;
   }
 
+  header button {
+    font-size: 1.2rem;
+  }
+
+  .content {
+    padding-top: 3rem;
+  }
+
+  .section {
+    margin: 1rem 0;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+  }
+
   button {
     font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  #mobile-menu .bg-white {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  #mobile-menu ul li a {
+    font-size: 1rem;
+  }
+
+  .chat-box {
+    max-height: 300px;
   }
 }
