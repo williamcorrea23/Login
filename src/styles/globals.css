@@ -1,21 +1,39 @@
-/* Estilos base */
+/* Estilos base para manter consistência */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f7fafc; /* Cor de fundo compatível */
   color: #333;
+  height: 100vh; /* Garante que a altura total seja 100% da viewport */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* Layout Principal */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.flex-grow { flex-grow: 1; }
-.h-screen { height: 100vh; }
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.h-screen {
+  height: 100vh;
+}
 
 /* Margens e Padding */
-.mt-16 { margin-top: 4rem; }
-.p-4 { padding: 1rem; }
-.mb-4 { margin-bottom: 1rem; }
+.mt-16 {
+  margin-top: 4rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
 
 /* Navegação inferior */
 .bottom-navigation {
@@ -24,7 +42,11 @@ body {
   padding: 0.5rem 0;
   background-color: #009739; /* Verde da bandeira do Brasil */
   color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   border-top: 1px solid #ccc;
+  z-index: 10;
 }
 
 .bottom-navigation a {
@@ -32,6 +54,7 @@ body {
   flex-grow: 1;
   color: white;
   text-decoration: none;
+  padding: 0.5rem 0;
 }
 
 .bottom-navigation a.active {
@@ -46,6 +69,7 @@ header {
   text-align: center;
   position: sticky;
   top: 0;
+  width: 100%;
   z-index: 10;
 }
 
@@ -57,7 +81,9 @@ header h1 {
 /* Principal */
 main {
   flex-grow: 1;
+  overflow-y: auto;
   padding: 1rem;
+  margin-bottom: 56px; /* Espaço para a navegação inferior */
 }
 
 /* Cartões de estatísticas no Dashboard */
@@ -79,13 +105,25 @@ main {
   display: grid;
 }
 
-.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-1 { 
+  grid-template-columns: repeat(1, minmax(0, 1fr)); 
+}
 
-.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 768px) {
+  .grid-cols-2 { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  }
+}
 
-.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (min-width: 1024px) {
+  .grid-cols-3 { 
+    grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  }
+}
 
-.gap-4 { gap: 1rem; }
+.gap-4 {
+  gap: 1rem;
+}
 
 /* Cards de Aulas */
 .lessons .card {
@@ -101,14 +139,16 @@ main {
 }
 
 /* Exercícios */
-.exercises .input-group { margin-bottom: 0.5rem; }
+.exercises .input-group {
+  margin-bottom: 0.5rem;
+}
 
 .exercises .input-group label {
   display: block;
   margin-bottom: 0.25rem;
 }
 
-.exercises .input-group input, 
+.exercises .input-group input,
 .exercises .input-group select {
   width: 100%;
   padding: 0.5rem;
@@ -226,13 +266,4 @@ main {
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-}
-
-/* Responsividade */
-@media (min-width: 768px) {
-  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (min-width: 1024px) {
-  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
