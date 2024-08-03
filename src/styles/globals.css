@@ -1,248 +1,162 @@
-/* Global Styles */
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Estilos globais */
 body {
   font-family: 'Roboto', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #f9f9f9;
+  background-color: #f4f4f4;
   color: #333;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
-/* Header Styles */
+/* Estilos do header */
 header {
-  width: 100%;
-  padding: 1rem;
-  background: #1e66a5; /* Color inspired by ENEM logo */
-  color: white;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-/* Main Container */
-.main-container {
-  flex: 1;
-  width: 100%;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-/* Section Styles */
-.section {
-  margin-bottom: 2rem;
-}
-
-.section h2 {
-  margin-bottom: 1rem;
-  color: #1e66a5; /* Same inspired color */
-}
-
-/* Navigation */
-.navbar {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
   display: flex;
-  justify-content: space-around;
-  padding: 1rem;
-  background: #1e66a5; /* Same inspired color */
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .main-container {
-    padding: 0.5rem;
-    margin: 1rem 0.5rem;
-  }
-
-  header {
-    padding: 0.5rem;
-  }
-
-  .navbar {
-    padding: 0.5rem;
-  }
-}
-
-/* Dashboard Styles */
-.dashboard {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
-.dashboard-stats {
+.header-logo {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 100%;
-  margin: 1rem 0;
+  align-items: center;
 }
 
-.stat-box {
-  background: #e3f2fd;
-  color: #1e66a5;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  flex: 1;
-  margin: 0.5rem;
-  max-width: 100px;
+.header-logo img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
 }
 
-/* Lessons Styles */
-.lessons .lesson {
-  background: #e3f2fd;
-  color: #1e66a5;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* Exercises Styles */
-.exercise {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background: #e3f2fd;
-  color: #1e66a5;
-  border-radius: 8px;
-}
-
-.exercise h3 {
-  margin-top: 0;
-}
-
-/* Writing (Redacao) Styles */
-.redacao-form {
+nav ul {
+  list-style: none;
   display: flex;
-  flex-direction: column;
 }
 
-.redacao-form textarea {
-  width: 100%;
-  height: 200px;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 1rem;
-  font-family: 'Roboto', sans-serif;
+nav ul li {
+  margin-right: 15px;
 }
 
-.redacao-form button {
-  padding: 1rem;
-  background: #1e66a5;
-  color: white;
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos da seção */
+.section {
+  display: none;
+  padding: 20px;
+}
+
+.section.active {
+  display: block;
+}
+
+/* Estilos do grid */
+.grid {
+  display: grid;
+  gap: 10px;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Estilos de botões */
+button {
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-.redacao-form button:hover {
-  background: #144a74;
+button:hover {
+  background-color: #0056b3;
 }
 
-/* Chatbot Styles */
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 400px;
+/* Estilos de formulários */
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
+  border-radius: 5px;
 }
 
-.message-container {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: scroll;
-  background: #f1f1f1;
-}
-
-.message {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  max-width: 80%;
-}
-
-.message.user {
-  background: #c8e6c9;
-  align-self: flex-end;
-}
-
-.message.bot {
-  background: white;
-  align-self: flex-start;
-  border: 1px solid #ccc;
-}
-
-.message-input {
-  display: flex;
-  border-top: 1px solid #ccc;
-}
-
-.message-input input {
-  flex: 1;
-  padding: 1rem;
-  border: none;
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #007bff;
   outline: none;
 }
 
-.message-input button {
-  padding: 1rem;
-  background: #1e66a5;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  nav ul li {
+    margin-bottom: 10px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* Uma coluna em dispositivos móveis */
+  }
+
+  .section {
+    padding: 10px; /* Menos padding em dispositivos móveis */
+  }
+
+  button {
+    width: 100%; /* Botões ocupam toda a largura */
+  }
 }
 
-.message-input button:hover {
-  background: #144a74;
-}
+/* Estilos para telas menores */
+@media (max-width: 480px) {
+  .header-logo img {
+    width: 30px; /* Reduzir o tamanho do logo */
+  }
 
-/* Profile Styles */
-.profile-container {
-  text-align: center;
-}
+  nav ul li {
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
 
-.profile-container button {
-  padding: 1rem;
-  background: #1e66a5;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-}
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: 8px; /* Menos padding em campos de entrada */
+  }
 
-.profile-container button:hover {
-  background: #144a74;
+  button {
+    padding: 8px 10px; /* Menos padding em botões */
+  }
 }
