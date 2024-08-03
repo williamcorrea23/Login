@@ -1,277 +1,239 @@
-/* Estilos do cabeçalho */
-header {
-  background-color: #009739; /* Verde da bandeira do Brasil */
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-}
-
-nav {
-  color: #fff;
-  padding: 10px;
-}
-
-nav ul {
-  list-style-type: none;
+/* Estilos base */
+body {
   margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7fafc; /* Cor de fundo compatível */
+  color: #333;
 }
 
-nav ul li {
-  display: inline;
-  margin-right: 10px;
+/* Layout Principal */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-grow { flex-grow: 1; }
+.h-screen { height: 100vh; }
+
+/* Margens e Padding */
+.mt-16 { margin-top: 4rem; }
+.p-4 { padding: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+/* Navegação inferior */
+.bottom-navigation {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  background-color: #009739; /* Verde da bandeira do Brasil */
+  color: white;
+  border-top: 1px solid #ccc;
 }
 
-nav ul li a {
-  color: #fff;
+.bottom-navigation a {
+  text-align: center;
+  flex-grow: 1;
+  color: white;
   text-decoration: none;
 }
 
-nav ul li a:hover {
-  text-decoration: underline;
+.bottom-navigation a.active {
+  border-bottom: 2px solid #fff;
 }
 
-.header-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+/* Header */
+header {
+  background-color: #009739;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.header-logo img {
-  width: 40px;
-  height: auto;
-}
-
-/* Estilos gerais */
-body {
-  font-family: Arial, sans-serif;
+header h1 {
   margin: 0;
-  padding: 0;
-  background-color: #f9f9f9; /* Cor de fundo padrão */
-}
-
-.section {
-  display: none;
-}
-
-.section.active {
-  display: block;
-  padding: 20px;
-}
-
-.grid {
-  display: grid;
-  gap: 10px;
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.md\:grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.lg\:grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.bg-white {
-  background-color: #fff;
-}
-
-.p-6 {
-  padding: 1.5rem;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.text-xl {
   font-size: 1.25rem;
 }
 
-.font-bold {
-  font-weight: 700;
+/* Principal */
+main {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+/* Cartões de estatísticas no Dashboard */
+.dashboard .card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  text-align: center;
 }
 
-.text-gray-600 {
-  color: #4b5563;
+.dashboard .card h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
+/* Grid de Aulas */
+.grid {
+  display: grid;
 }
 
-/* Estilos do chat */
-.chat-container {
-  max-width: 700px;
-  height: 600px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
 
-.chat-box {
-  flex: 1;
-  overflow-y: scroll;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-}
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-.message {
-  padding: 10px;
-  margin: 10px 0;
-}
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-.bot-message {
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  max-width: 80%;
-}
+.gap-4 { gap: 1rem; }
 
-.user-message {
-  background-color: #d0e0f0;
-  text-align: right;
-  border-radius: 10px;
-  max-width: 80%;
-  margin-left: auto;
-}
-
-/* Estilos de entrada e botões */
-input[type="text"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #009739; /* Verde da bandeira do Brasil */
-  color: white;
+/* Cards de Aulas */
+.lessons .card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #006b3f; /* Verde mais escuro para hover */
-}
-
-/* Estilos da página de Redação */
-body.dark-mode {
-  background-color: #181818;
-  color: #f8f8f8;
-}
-
-.container-redacao {
+.lessons .card:hover {
   background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+}
+
+/* Exercícios */
+.exercises .input-group { margin-bottom: 0.5rem; }
+
+.exercises .input-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.exercises .input-group input, 
+.exercises .input-group select {
   width: 100%;
-  position: relative;
-}
-
-.container-redacao.dark-mode {
-  background-color: #242424;
-}
-
-h1 {
-  margin-top: 0;
-}
-
-.instructions {
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin-top: 10px;
-}
-
-input[type="text"],
-input[type="file"],
-select,
-textarea {
-  padding: 8px;
-  margin-top: 5px;
+  padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
-select {
+.exercises button {
   width: 100%;
+  background-color: #009739;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
-textarea {
-  font-family: monospace;
-  line-height: 1.2;
-  height: 750px;
-  background: repeating-linear-gradient(white, white 29px, #ccc 30px);
-  overflow: hidden;
-  position: relative;
+.exercises .question {
+  margin-bottom: 1rem;
 }
 
-textarea::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(white, white 29px, #ccc 30px);
-  z-index: -1;
+.exercises .question p {
+  margin: 0 0 0.5rem;
 }
 
-button.dark-mode {
-  background-color: #444;
-  color: #f8f8f8;
+.exercises .question div {
+  margin-bottom: 0.5rem;
 }
 
-button.dark-mode:hover {
-  background-color: #555;
+/* Redação */
+.redacao form {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-#timer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #fff;
-  padding: 10px;
+.redacao .input-group {
+  margin-bottom: 0.5rem;
+}
+
+.redacao .input-group input,
+.redacao .input-group textarea {
+  width: 100%;
+  padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
-/* Estilos responsivos */
-@media (max-width: 600px) {
-  .container-redacao {
-    padding: 15px;
-  }
+.redacao button {
+  width: 100%;
+  background-color: #009739;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
 
-  textarea {
-    height: 500px;
-  }
+/* Chatbot */
+.chatbot .message {
+  margin-bottom: 0.5rem;
+}
+
+.chatbot .user-message {
+  text-align: right;
+  background-color: #e0f7fa;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
+.chatbot .assistant-message {
+  text-align: left;
+  background-color: #f0f0f0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
+.chatbot input[type="text"] {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.chatbot button {
+  background-color: #009739;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+  cursor: pointer;
+}
+
+/* Perfil */
+.profile .card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  text-align: center;
+}
+
+.profile .card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.profile button {
+  background-color: #009739;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
