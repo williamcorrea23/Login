@@ -1,4 +1,4 @@
-/* Estilos base para manter consistência */
+/* Estilos base */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -39,6 +39,7 @@ body {
 .bottom-navigation {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 0.5rem 0;
   background-color: #009739; /* Verde da bandeira do Brasil */
   color: white;
@@ -51,10 +52,11 @@ body {
 
 .bottom-navigation a {
   text-align: center;
-  flex-grow: 1;
   color: white;
   text-decoration: none;
-  padding: 0.5rem 0;
+  font-size: 1rem;
+  padding: 0.5rem;
+  flex-grow: 1;
 }
 
 .bottom-navigation a.active {
@@ -75,15 +77,15 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 /* Principal */
 main {
   flex-grow: 1;
-  overflow-y: auto;
   padding: 1rem;
   margin-bottom: 56px; /* Espaço para a navegação inferior */
+  overflow-y: auto; /* Apenas o conteúdo principal pode rolar */
 }
 
 /* Cartões de estatísticas no Dashboard */
