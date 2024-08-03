@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoginForm.css'; // Importe o arquivo CSS
+//import './LoginForm.css'; // Importe o arquivo CSS
 
 const LoginForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
