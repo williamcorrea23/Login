@@ -1,117 +1,105 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Estilos globais */
+/* Global Styles */
 body {
+  margin: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #f4f4f4; /* Cor de fundo neutra */
+  color: #333; /* Cor do texto */
 }
 
-/* Estilos do cabeçalho */
+/* Header Styles */
 header {
-  background-color: #007bff;
-  padding: 15px;
-  text-align: center;
+  background-color: #4CAF50; /* Cor verde para o cabeçalho */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-logo {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
 .header-logo img {
   width: 40px;
   height: auto;
+  margin-right: 10px;
 }
 
-/* Navegação */
 nav {
-  margin: 10px 0;
+  display: flex;
 }
 
 nav ul {
-  display: flex;
-  justify-content: center;
   list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
 }
 
 nav ul li {
-  margin: 0 10px;
+  margin-right: 15px; /* Espaçamento entre os itens do menu */
 }
 
 nav ul li a {
-  color: #fff;
+  color: #fff; /* Cor do texto do menu */
   text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2); /* Efeito hover */
 }
 
-/* Seções */
+/* Section Styles */
 .section {
   display: none;
-  padding: 20px;
 }
 
 .section.active {
   display: block;
+  padding: 20px;
 }
 
-/* Grid */
+/* Grid Styles */
 .grid {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 }
 
-/* Botões */
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Button Styles */
 button {
-  background-color: #007bff;
+  background-color: #4CAF50; /* Cor verde para botões */
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #45a049; /* Efeito hover para botões */
 }
 
-/* Formulários */
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media (max-width: 600px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: column; /* Menu em coluna em telas pequenas */
+    align-items: flex-start;
   }
 
   nav ul li {
-    margin: 5px 0;
-  }
-
-  .header-logo {
-    flex-direction: column;
-  }
-
-  .grid {
-    grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+    margin-bottom: 10px; /* Espaçamento entre itens do menu */
   }
 }
