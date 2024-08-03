@@ -50,7 +50,7 @@ const MobileENEMApp = () => {
         <Header />
         <main className="flex-grow overflow-y-auto p-4">
           <Routes>
-            <Route path="/" element={user ? <Navigate to="/profile" /> : <Login />} />
+            <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} />
