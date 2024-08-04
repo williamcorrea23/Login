@@ -74,9 +74,9 @@ const MobileENEMApp = () => {
 
 const Header = () => (
   <header className="bg-green-600 p-2 text-white text-center">
-//    <div className="container mx-auto text-center">
-      <h1 className="text-xl font-bold text-white">ENEM Wise E-Learning Brasil</h1>
-//    </div>
+
+    <h1 className="text-xl font-bold text-white">ENEM Wise E-Learning Brasil</h1>
+
   </header>
 );
 
