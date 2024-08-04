@@ -390,7 +390,7 @@ const Chatbot = ({ chatHistory, setChatHistory }) => {
 };
 
 // Assuming you have a Profile component, if not, you can create a basic one like this:
-const Profile = () => {
+const Profilepage = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
