@@ -12,7 +12,8 @@ import { faHome, faBook, faPencilAlt, faEdit, faComments, faUser } from '@fortaw
 import './styles/custom-tailwind.css';
 import './styles/globals.css';
 
-const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+const API_KEY = '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'
+//process.env.REACT_APP_OPENAI_API_KEY;
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 
 const MobileENEMApp = () => {
@@ -119,19 +120,115 @@ const StatCard = ({ title, value }) => (
 );
 
 const Lessons = ({ setCurrentLesson }) => {
-  const subjects = ['Matemática', 'Linguagens', 'Ciências Humanas', 'Ciências da Natureza', 'Redação'];
+  const lessons = {
+    'Matemática': {
+      id: 'matematica',
+      title: "Matemática",
+      details: "Selecione uma aula para saber mais:\n1. Álgebra\n2. Geometria\n3. Trigonometria\n4. Cálculo\n5. Estatística\n6. Probabilidade\n7. Álgebra Linear\n8. Equações Diferenciais\n9. Números Complexos\n10. Teoria dos Números",
+      subtopics: {
+        '1': "+Conteúdo Enem de Álgebra.",
+        '2': "+Conteúdo Enem de Geometria.",
+        '3': "+Conteúdo Enem de Trigonometria.",
+        '4': "+Conteúdo Enem de Cálculo.",
+        '5': "+Conteúdo Enem de Estatística.",
+        '6': "+Conteúdo Enem de Probabilidade.",
+        '7': "+Conteúdo Enem de Álgebra Linear.",
+        '8': "+Conteúdo Enem de Equações Diferenciais.",
+        '9': "+Conteúdo Enem de Números Complexos.",
+        '10': "+Conteúdo Enem de Teoria dos Números."
+      }
+    },
+    // Adicione os outros tópicos de forma semelhante
+    // ...
+  };
 
   const handleLessonClick = async (subject) => {
     setCurrentLesson(subject);
     try {
-      const response = await axios.post('/api/start-lesson', { subject });
-      toast.success(`Aula de ${subject} iniciada!`);
-      console.log(`Aula de ${subject} iniciada:`, response.data);
+      const lesson = lessons[subject];
+      displayLessonDetails(lesson);
+      
+      // Inicie uma conversa com o ChatGPT sobre o tópico selecionado
+      const response = await callGPTAssistant(`Olá! Gostaria de começar uma aula sobre ${subject}. Pode me fornecer uma visão geral e alguns detalhes sobre os sub-tópicos?`);
+      displayMessage(response);
+      
     } catch (error) {
       toast.error(`Erro ao iniciar aula de ${subject}`);
       console.error(`Erro ao iniciar aula de ${subject}:`, error);
     }
   };
+
+  const displayLessonDetails = (lesson) => {
+    const chatBox = document.getElementById('chat-box');
+    if (chatBox) {
+      const message = `Bem-vindo ao curso de ${lesson.title}! Por favor, selecione uma aula para começar:\n${lesson.details}`;
+      displayMessage(message);
+    }
+  };
+
+  const displayMessage = (message) => {
+    const chatBox = document.getElementById('chat-box');
+    if (chatBox) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', 'bot-message');
+      messageDiv.innerText = message;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  };
+
+  // Função para chamar o assistente GPT
+  async function callGPTAssistant(prompt) {
+    const apiKey = 'YOUR_API_KEY'; // Substitua pela sua chave de API OpenAI
+    const endpoint = 'https://api.openai.com/v1/chat/completions';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4-turbo", // Use o modelo mais recente
+          messages: [{
+            role: "user",
+            content: prompt
+          }],
+          max_tokens: 850,
+          temperature: 0.4,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Erro na resposta:', errorText);
+        return `Erro de resposta da API: ${response.status} - ${response.statusText}`;
+      }
+
+      const data = await response.json();
+      if (data.choices && data.choices.length > 0) {
+        return data.choices[0].message.content.trim();
+      }
+
+      return 'Resposta inesperada da API.';
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      return 'Erro ao chamar o assistente GPT.';
+    }
+  }
+
+  // Renderiza a lista de assuntos como botões
+  return (
+    <div>
+      {Object.keys(lessons).map(subject => (
+        <button key={subject} onClick={() => handleLessonClick(subject)}>
+          {subject}
+        </button>
+      ))}
+    </div>
+  );
+};
 
   return (
     <div className="mt-4">
@@ -164,11 +261,16 @@ const Exercises = ({ exercises, setExercises }) => {
 
     try {
       const response = await axios.post(API_URL, {
-        model: "gpt-3.5-turbo",
-        messages: [{
-          role: "system",
-          content: `Generate ${numQuestions} multiple-choice questions about ${subject} for ENEM exam preparation. Format each question with 4 options (A, B, C, D) and indicate the correct answer.`
-        }],
+         model: "gpt-4-turbo", // Modelo atualizado
+    messages: [{
+      role: "system",
+      content: `Generate ${numQuestions} multiple-choice questions about ${subject} for ENEM exam preparation. Format each question with 4 options (A, B, C, D) and indicate the correct answer.`
+    }],
+    temperature: 0.4, // Ajuste a criatividade conforme necessário
+    max_tokens: 1500, // Ajuste conforme o comprimento esperado da resposta
+    top_p: 1, // Controle de probabilidade acumulada
+    frequency_penalty: 0, // Penalidade de frequência
+    presence_penalty: 0, // Penalidade de presença
       }, {
         headers: {
           'Authorization': `Bearer ${API_KEY}`,
@@ -255,16 +357,212 @@ const Redacao = () => {
   const [tema, setTema] = useState('');
   const [conteudo, setConteudo] = useState('');
   const [timer, setTimer] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [resultado, setResultado] = useState('');
+  const [temasRecentes, setTemasRecentes] = useState([]);
+  const intervalRef = useRef(null);
+  const timeRef = useRef(0);
+
+  useEffect(() => {
+    loadRedacaoStyles();
+    setTemasRecentes(getTemasRecentes());
+    return () => {
+      removeRedacaoStyles();
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  const startTimer = () => {
+    if (!isPaused) {
+      timeRef.current = timer * 60;
+    }
+    setIsPaused(false);
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(() => {
+      const minutes = Math.floor(timeRef.current / 60);
+      const seconds = timeRef.current % 60;
+
+      setTimer(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+      timeRef.current--;
+
+      if (timeRef.current < 0) {
+        clearInterval(intervalRef.current);
+        toast.info('Tempo esgotado!');
+      }
+    }, 1000);
+  };
+
+  const pauseTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      setIsPaused(true);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/submit-redacao', { tema, conteudo });
-      toast.success('Redação enviada para análise!');
+      const resultado = await analisarRedacaoComGPT(tema, conteudo);
+      setResultado(resultado);
+      toast.success('Redação analisada com sucesso!');
     } catch (error) {
-      console.error('Erro ao enviar redação:', error);
-      toast.error('Erro ao enviar redação. Por favor, tente novamente.');
+      console.error('Erro ao analisar redação:', error);
+      toast.error('Erro ao analisar redação. Por favor, tente novamente.');
     }
+  };
+
+  const analisarRedacaoComGPT = async (titulo, conteudo) => {
+
+    const prompt = `Você é um professor experiente e altamente qualificado, especializado na correção de redações do ENEM. Sua tarefa é analisar a redação a seguir, considerando todos os critérios estabelecidos pelo edital do ENEM:
+
+    Título: ${titulo}
+    Conteúdo: ${conteudo}
+    
+    **Instruções para a análise:**
+    - Forneça uma análise detalhada considerando os seguintes aspectos:
+      1. **Aderência ao tema**: Avalie se o estudante abordou o tema proposto de maneira completa e aprofundada, sem fugir do assunto.
+      2. **Estrutura argumentativa**: Verifique a construção da argumentação, a clareza na exposição das ideias e a organização lógica dos parágrafos (introdução, desenvolvimento e conclusão).
+      3. **Coesão e coerência**: Analise o uso adequado de conectivos, a fluidez entre as partes do texto e a consistência das ideias apresentadas.
+      4. **Proposta de intervenção**: Avalie a presença de uma proposta de intervenção clara, detalhada e viável para o problema discutido, conforme exigido pelo ENEM.
+      5. **Respeito aos direitos humanos**: Certifique-se de que a redação respeita os direitos humanos, sem apresentar preconceitos ou estereótipos.
+    - Atribua uma nota de 0 a 1000 com base nos critérios acima.
+    - Justifique a nota atribuída com uma análise detalhada.
+    - Ofereça recomendações específicas e construtivas sobre como o estudante pode melhorar em cada aspecto avaliado.
+
+    **Modelo de resposta:**
+    - Introdução da análise
+    - Aderência ao tema: [Análise detalhada]
+    - Estrutura argumentativa: [Análise detalhada]
+    - Coesão e coerência: [Análise detalhada]
+    - Proposta de intervenção: [Análise detalhada]
+    - Respeito aos direitos humanos: [Análise detalhada]
+    - Nota final: [0 a 1000]
+    - Justificativa da nota: [Análise detalhada]
+    - Recomendações de melhoria: [Sugestões específicas para cada aspecto]
+
+    Análise da Redação:`;
+
+    const response = await axios.post(url, {
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 4000,
+      temperature: 0.5
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      }
+    });
+
+    return response.data.choices[0].message.content;
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow p-4">
+      <h2 className="text-xl font-bold mb-4">Redação do ENEM</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="temas" className="block text-sm font-medium text-gray-700 mb-1">Temas Recentes:</label>
+          <select
+            id="temas"
+            className="w-full p-2 border rounded"
+            onChange={(e) => setTema(e.target.value)}
+          >
+            <option value="">Selecione um tema</option>
+            {temasRecentes.map((tema) => (
+              <option key={tema.id} value={tema.nome}>
+                {tema.ano} - {tema.nome}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 mb-1">Título:</label>
+          <input
+            id="titulo"
+            type="text"
+            value={tema}
+            onChange={(e) => setTema(e.target.value)}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="conteudo" className="block text-sm font-medium text-gray-700 mb-1">Conteúdo:</label>
+          <textarea
+            id="conteudo"
+            value={conteudo}
+            onChange={(e) => setConteudo(e.target.value)}
+            className="w-full p-2 border rounded"
+            rows="10"
+            required
+          ></textarea>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="countdown" className="block text-sm font-medium text-gray-700 mb-1">Timer (minutos):</label>
+          <div className="flex">
+            <input
+              id="countdown"
+              type="number"
+              value={timer}
+              onChange={(e) => setTimer(e.target.value)}
+              className="w-1/3 p-2 border rounded-l"
+            />
+            <button type="button" onClick={startTimer} className="w-1/3 bg-blue-500 text-white p-2">
+              {isPaused ? 'Retomar' : 'Iniciar'} Timer
+            </button>
+            <button type="button" onClick={pauseTimer} className="w-1/3 bg-yellow-500 text-white p-2 rounded-r">
+              Pausar Timer
+            </button>
+          </div>
+        </div>
+        <div id="time" className="text-center text-2xl font-bold mb-4">{timer}</div>
+        <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">
+          Enviar para Análise
+        </button>
+      </form>
+      {resultado && (
+        <div id="resultado" className="mt-4">
+          <h3 className="text-lg font-bold mb-2">Análise da Redação</h3>
+          <p className="whitespace-pre-wrap">{resultado}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+}
+
+export default Redacao;
+
+function loadRedacaoStyles() {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'styles/redacao.css';
+  link.id = 'redacao-css';
+  document.head.appendChild(link);
+}
+
+function removeRedacaoStyles() {
+  const link = document.getElementById('redacao-css');
+  if (link) {
+    document.head.removeChild(link);
+  }
+}
+
+function getTemasRecentes() {
+  return [
+    { id: 1, ano: 2023, nome: "Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil" },
+    { id: 2, ano: 2022, nome: "Desafios para a valorização de comunidades e povos tradicionais no Brasil" },
+    { id: 3, ano: 2021, nome: "Invisibilidade e registro civil: garantia de acesso à cidadania no Brasil" },
+    { id: 4, ano: 2020, nome: "O estigma associado às doenças mentais na sociedade brasileira" },
+    { id: 5, ano: 2019, nome: "Democratização do acesso ao cinema no Brasil" },
+    // ... (outros temas)
+  ];
+}
   };
 
   const startTimer = () => {
