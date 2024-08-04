@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth } from './components/firebase';
 import Login from './components/login';
 import SignUp from './components/register';
 import Profile from './components/profile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faBook, faPencilAlt, faEdit, faComments, faUser } from '@fortawesome/free-solid-svg-icons';
 import './styles/custom-tailwind.css';
 import './styles/globals.css';
 
@@ -21,9 +23,10 @@ const MobileENEMApp = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
     });
+    return () => unsubscribe();
   }, []);
 
   const renderContent = () => {
@@ -49,7 +52,7 @@ const MobileENEMApp = () => {
     <Router>
       <div className="flex flex-col h-screen bg-gray-100">
         <Header />
-        <main className="flex-grow overflow-y-auto p-4">
+        <main className="flex-grow overflow-y-auto p-4 pt-16 pb-20">
           <Routes>
             <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login />} />
             <Route path="/login" element={<Login />} />
@@ -69,36 +72,49 @@ const MobileENEMApp = () => {
   );
 };
 
-const Header = () => <header className="bg-blue-600 text-white p-4">Header</header>;
+const Header = () => (
+  <header className="bg-green-700 p-4 shadow-md fixed top-0 w-full z-50">
+    <div className="container mx-auto text-center">
+      <h1 className="text-xl font-bold text-white">ENEM Wise E-Learning Brasil</h1>
+    </div>
+  </header>
+);
 
 const BottomNavigation = ({ activeSection, setActiveSection }) => (
-  <nav className="bg-gray-200 p-4">
-    <button onClick={() => setActiveSection('dashboard')}>Dashboard</button>
-    <button onClick={() => setActiveSection('lessons')}>Aulas</button>
-    <button onClick={() => setActiveSection('exercises')}>Exercícios</button>
-    <button onClick={() => setActiveSection('redacao')}>Redação</button>
-    <button onClick={() => setActiveSection('chatbot')}>Chatbot</button>
-    <button onClick={() => setActiveSection('profile')}>Perfil</button>
+  <nav className="bg-white fixed bottom-0 w-full border-t border-gray-200 z-50">
+    <div className="container mx-auto flex justify-around">
+      <NavItem icon={faHome} label="Dashboard" section="dashboard" activeSection={activeSection} setActiveSection={setActiveSection} />
+      <NavItem icon={faBook} label="Aulas" section="lessons" activeSection={activeSection} setActiveSection={setActiveSection} />
+      <NavItem icon={faPencilAlt} label="Exercícios" section="exercises" activeSection={activeSection} setActiveSection={setActiveSection} />
+      <NavItem icon={faEdit} label="Redação" section="redacao" activeSection={activeSection} setActiveSection={setActiveSection} />
+      <NavItem icon={faComments} label="Chatbot" section="chatbot" activeSection={activeSection} setActiveSection={setActiveSection} />
+      <NavItem icon={faUser} label="Perfil" section="profile" activeSection={activeSection} setActiveSection={setActiveSection} />
+    </div>
   </nav>
 );
 
+const NavItem = ({ icon, label, section, activeSection, setActiveSection }) => (
+  <Link to={`/${section}`} className={`nav-item ${activeSection === section ? 'active' : ''}`} onClick={() => setActiveSection(section)}>
+    <FontAwesomeIcon icon={icon} />
+    <span>{label}</span>
+  </Link>
+);
+
 const Dashboard = () => (
-  <div className="mt-16">
+  <div className="mt-4">
     <h2 className="text-2xl font-bold mb-4 text-center">Painel de Controle</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div className="bg-white p-4 rounded-lg shadow text-center">
-        <h3 className="font-bold">Aulas Concluídas</h3>
-        <p className="text-2xl">0</p>
-      </div>
-      <div className="bg-white p-4 rounded-lg shadow text-center">
-        <h3 className="font-bold">Exercícios Realizados</h3>
-        <p className="text-2xl">0</p>
-      </div>
-      <div className="bg-white p-4 rounded-lg shadow text-center">
-        <h3 className="font-bold">Pontuação Total</h3>
-        <p className="text-2xl">0%</p>
-      </div>
+      <StatCard title="Aulas Concluídas" value="0" />
+      <StatCard title="Exercícios Realizados" value="0" />
+      <StatCard title="Pontuação Total" value="0%" />
     </div>
+  </div>
+);
+
+const StatCard = ({ title, value }) => (
+  <div className="bg-white p-4 rounded-lg shadow text-center">
+    <h3 className="font-bold">{title}</h3>
+    <p className="text-2xl">{value}</p>
   </div>
 );
 
@@ -109,20 +125,22 @@ const Lessons = ({ setCurrentLesson }) => {
     setCurrentLesson(subject);
     try {
       const response = await axios.post('/api/start-lesson', { subject });
+      toast.success(`Aula de ${subject} iniciada!`);
       console.log(`Aula de ${subject} iniciada:`, response.data);
     } catch (error) {
+      toast.error(`Erro ao iniciar aula de ${subject}`);
       console.error(`Erro ao iniciar aula de ${subject}:`, error);
     }
   };
 
   return (
-    <div className="mt-16">
+    <div className="mt-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Aulas</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {subjects.map((subject) => (
           <div 
             key={subject} 
-            className="bg-white p-4 rounded-lg shadow cursor-pointer"
+            className="bg-white p-4 rounded-lg shadow cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => handleLessonClick(subject)}
           >
             <h3 className="font-bold">{subject}</h3>
@@ -140,7 +158,7 @@ const Exercises = ({ exercises, setExercises }) => {
 
   const generateQuestions = async () => {
     if (!subject || !numQuestions) {
-      alert('Por favor, selecione uma matéria e o número de questões.');
+      toast.error('Por favor, selecione uma matéria e o número de questões.');
       return;
     }
 
@@ -160,9 +178,10 @@ const Exercises = ({ exercises, setExercises }) => {
 
       const generatedQuestions = parseQuestions(response.data.choices[0].message.content);
       setExercises(generatedQuestions);
+      toast.success('Questões geradas com sucesso!');
     } catch (error) {
       console.error('Error generating questions:', error);
-      alert('Erro ao gerar questões. Por favor, tente novamente.');
+      toast.error('Erro ao gerar questões. Por favor, tente novamente.');
     }
   };
 
@@ -180,7 +199,7 @@ const Exercises = ({ exercises, setExercises }) => {
   };
 
   return (
-    <div className="mt-16">
+    <div className="mt-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Exercícios</h2>
       <div className="bg-white p-4 rounded-lg shadow mb-4">
         <h3 className="font-bold mb-2">Gerador de Questões</h3>
@@ -206,7 +225,7 @@ const Exercises = ({ exercises, setExercises }) => {
           onChange={(e) => setNumQuestions(e.target.value)}
         />
         <button 
-          className="w-full bg-green-700 text-white p-2 rounded"
+          className="w-full bg-green-700 text-white p-2 rounded hover:bg-green-600 transition-colors"
           onClick={generateQuestions}
         >
           Gerar Questões
@@ -219,8 +238,8 @@ const Exercises = ({ exercises, setExercises }) => {
             <div key={exercise.id} className="mb-4">
               <p className="font-bold">{exercise.question}</p>
               {exercise.options.map((option, index) => (
-                <div key={index}>
-                  <input type="radio" id={`q${exercise.id}o${index}`} name={`question${exercise.id}`} />
+                <div key={index} className="flex items-center">
+                  <input type="radio" id={`q${exercise.id}o${index}`} name={`question${exercise.id}`} className="mr-2" />
                   <label htmlFor={`q${exercise.id}o${index}`}>{option}</label>
                 </div>
               ))}
@@ -241,10 +260,10 @@ const Redacao = () => {
     e.preventDefault();
     try {
       const response = await axios.post('/api/submit-redacao', { tema, conteudo });
-      alert('Redação enviada para análise!');
+      toast.success('Redação enviada para análise!');
     } catch (error) {
       console.error('Erro ao enviar redação:', error);
-      alert('Erro ao enviar redação. Por favor, tente novamente.');
+      toast.error('Erro ao enviar redação. Por favor, tente novamente.');
     }
   };
 
@@ -253,6 +272,7 @@ const Redacao = () => {
       setTimer((prevTimer) => {
         if (prevTimer <= 0) {
           clearInterval(interval);
+          toast.info('Tempo esgotado!');
           return 0;
         }
         return prevTimer - 1;
@@ -261,7 +281,7 @@ const Redacao = () => {
   };
 
   return (
-    <div className="mt-16">
+    <div className="mt-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Redação do ENEM</h2>
       <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow">
         <div className="mb-4">
@@ -292,11 +312,11 @@ const Redacao = () => {
             onChange={(e) => setTimer(parseInt(e.target.value) * 60)}
             className="w-full p-2 border rounded"
           />
-          <button type="button" onClick={startTimer} className="mt-2 bg-blue-500 text-white p-2 rounded">
+          <button type="button" onClick={startTimer} className="mt-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-400 transition-colors">
             Iniciar Timer
           </button>
         </div>
-        <button type="submit" className="w-full bg-green-700 text-white p-2 rounded">
+        <button type="submit" className="w-full bg-green-700 text-white p-2 rounded hover:bg-green-600 transition-colors">
           Enviar para Análise
         </button>
       </form>
@@ -340,11 +360,11 @@ const Chatbot = ({ chatHistory, setChatHistory }) => {
   };
 
   return (
-    <div className="mt-16">
+    <div className="mt-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Assistência por Chatbot</h2>
       <div className="bg-white p-4 rounded-lg shadow h-64 overflow-y-auto mb-4">
         {chatHistory.map((msg, index) => (
-          <div key={index} className={`message ${msg.role}-message mb-2`}>
+          <div key={index} className={`message ${msg.role}-message mb-2 p-2 rounded ${msg.role === 'user' ? 'bg-blue-100 text-right' : 'bg-gray-100'}`}>
             {msg.content}
           </div>
         ))}
@@ -359,7 +379,7 @@ const Chatbot = ({ chatHistory, setChatHistory }) => {
           onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
         />
         <button 
-          className="bg-green-700 text-white p-2 rounded-r"
+          className="bg-green-700 text-white p-2 rounded-r hover:bg-green-600 transition-colors"
           onClick={sendMessage}
         >
           Enviar
@@ -369,4 +389,47 @@ const Chatbot = ({ chatHistory, setChatHistory }) => {
   );
 };
 
+// Assuming you have a Profile component, if not, you can create a basic one like this:
+const Profile = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      toast.success('Logout realizado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+      toast.error('Erro ao fazer logout. Por favor, tente novamente.');
+    }
+  };
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <div className="mt-4">
+      <h2 className="text-2xl font-bold mb-4 text-center">Perfil</h2>
+      <div className="bg-white p-4 rounded-lg shadow">
+        <p><strong>Nome:</strong> {user.displayName || 'N/A'}</p>
+        <p><strong>Email:</strong> {user.email}</p>
+        <button 
+          onClick={handleLogout}
+          className="mt-4 bg-red-500 text-white p-2 rounded hover:bg-red-400 transition-colors"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default MobileENEMApp;
+                    
