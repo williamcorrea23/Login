@@ -52,7 +52,7 @@ const MobileENEMApp = () => {
     <Router>
       <div className="flex flex-col h-screen bg-gray-100">
         <Header />
-        <main className="flex-grow overflow-y-auto p-4 pt-16 pb-20">
+        <main className="flex-grow overflow-y-auto">
           <Routes>
             <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login />} />
             <Route path="/login" element={<Login />} />
@@ -73,16 +73,16 @@ const MobileENEMApp = () => {
 };
 
 const Header = () => (
-  <header className="bg-green-700 p-4 shadow-md fixed top-0 w-full z-50">
-    <div className="container mx-auto text-center">
+  <header className="bg-green-600 p-2 text-white text-center">
+//    <div className="container mx-auto text-center">
       <h1 className="text-xl font-bold text-white">ENEM Wise E-Learning Brasil</h1>
-    </div>
+//    </div>
   </header>
 );
 
 const BottomNavigation = ({ activeSection, setActiveSection }) => (
-  <nav className="bg-white fixed bottom-0 w-full border-t border-gray-200 z-50">
-    <div className="container mx-auto flex justify-around">
+  <nav className="bg-white border-t border-gray-200 fixed bottom-0 w-full">
+    <div className="flex justify-around">
       <NavItem icon={faHome} label="Dashboard" section="dashboard" activeSection={activeSection} setActiveSection={setActiveSection} />
       <NavItem icon={faBook} label="Aulas" section="lessons" activeSection={activeSection} setActiveSection={setActiveSection} />
       <NavItem icon={faPencilAlt} label="Exercícios" section="exercises" activeSection={activeSection} setActiveSection={setActiveSection} />
@@ -94,14 +94,14 @@ const BottomNavigation = ({ activeSection, setActiveSection }) => (
 );
 
 const NavItem = ({ icon, label, section, activeSection, setActiveSection }) => (
-  <Link to={`/${section}`} className={`nav-item ${activeSection === section ? 'active' : ''}`} onClick={() => setActiveSection(section)}>
-    <FontAwesomeIcon icon={icon} />
-    <span>{label}</span>
+  <Link to={`/${section}`} className={`flex flex-col items-center py-2 ${activeSection === section ? 'text-green-600' : 'text-gray-600'}`} onClick={() => setActiveSection(section)}>
+    <FontAwesomeIcon icon={icon} className="text-xl mb-1" />
+    <span className="text-xs">{label}</span>
   </Link>
 );
 
 const Dashboard = () => (
-  <div className="mt-4">
+  <div className="p-4">
     <h2 className="text-2xl font-bold mb-4 text-center">Painel de Controle</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <StatCard title="Aulas Concluídas" value="0" />
@@ -199,7 +199,7 @@ const Lessons = ({ setCurrentLesson }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Aulas</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {Object.keys(lessons).map((subject) => (
@@ -269,7 +269,7 @@ const Exercises = ({ exercises, setExercises }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Exercícios</h2>
       <div className="bg-white p-4 rounded-lg shadow mb-4">
         <h3 className="font-bold mb-2">Gerador de Questões</h3>
@@ -542,7 +542,7 @@ const Chatbot = ({ chatHistory, setChatHistory }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Assistência por Chatbot</h2>
       <div className="bg-white p-4 rounded-lg shadow h-64 overflow-y-auto mb-4">
         {chatHistory.map((msg, index) => (
