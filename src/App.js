@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,8 +12,7 @@ import { faHome, faBook, faPencilAlt, faEdit, faComments, faUser } from '@fortaw
 import './styles/custom-tailwind.css';
 import './styles/globals.css';
 
-const API_KEY = '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'
-//process.env.REACT_APP_OPENAI_API_KEY;
+const API_KEY = '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';
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 
 const MobileENEMApp = () => {
@@ -139,7 +138,6 @@ const Lessons = ({ setCurrentLesson }) => {
       }
     },
     // Adicione os outros tópicos de forma semelhante
-    // ...
   };
 
   const handleLessonClick = async (subject) => {
@@ -148,7 +146,6 @@ const Lessons = ({ setCurrentLesson }) => {
       const lesson = lessons[subject];
       displayLessonDetails(lesson);
       
-      // Inicie uma conversa com o ChatGPT sobre o tópico selecionado
       const response = await callGPTAssistant(`Olá! Gostaria de começar uma aula sobre ${subject}. Pode me fornecer uma visão geral e alguns detalhes sobre os sub-tópicos?`);
       displayMessage(response);
       
@@ -177,64 +174,35 @@ const Lessons = ({ setCurrentLesson }) => {
     }
   };
 
-  // Função para chamar o assistente GPT
-  async function callGPTAssistant(prompt) {
-    const apiKey = 'YOUR_API_KEY'; // Substitua pela sua chave de API OpenAI
-    const endpoint = 'https://api.openai.com/v1/chat/completions';
-
+  const callGPTAssistant = async (prompt) => {
     try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
+      const response = await axios.post(API_URL, {
+        model: "gpt-4-turbo",
+        messages: [{
+          role: "user",
+          content: prompt
+        }],
+        max_tokens: 850,
+        temperature: 0.4,
+      }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
+          'Authorization': `Bearer ${API_KEY}`,
         },
-        body: JSON.stringify({
-          model: "gpt-4-turbo", // Use o modelo mais recente
-          messages: [{
-            role: "user",
-            content: prompt
-          }],
-          max_tokens: 850,
-          temperature: 0.4,
-        }),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Erro na resposta:', errorText);
-        return `Erro de resposta da API: ${response.status} - ${response.statusText}`;
-      }
-
-      const data = await response.json();
-      if (data.choices && data.choices.length > 0) {
-        return data.choices[0].message.content.trim();
-      }
-
-      return 'Resposta inesperada da API.';
+      return response.data.choices[0].message.content.trim();
     } catch (error) {
       console.error('Erro na requisição:', error);
       return 'Erro ao chamar o assistente GPT.';
     }
-  }
-
-  // Renderiza a lista de assuntos como botões
-  return (
-    <div>
-      {Object.keys(lessons).map(subject => (
-        <button key={subject} onClick={() => handleLessonClick(subject)}>
-          {subject}
-        </button>
-      ))}
-    </div>
-  );
-};
+  };
 
   return (
     <div className="mt-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Aulas</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {subjects.map((subject) => (
+        {Object.keys(lessons).map((subject) => (
           <div 
             key={subject} 
             className="bg-white p-4 rounded-lg shadow cursor-pointer hover:bg-gray-50 transition-colors"
@@ -261,16 +229,16 @@ const Exercises = ({ exercises, setExercises }) => {
 
     try {
       const response = await axios.post(API_URL, {
-         model: "gpt-4-turbo", // Modelo atualizado
-    messages: [{
-      role: "system",
-      content: `Generate ${numQuestions} multiple-choice questions about ${subject} for ENEM exam preparation. Format each question with 4 options (A, B, C, D) and indicate the correct answer.`
-    }],
-    temperature: 0.4, // Ajuste a criatividade conforme necessário
-    max_tokens: 1500, // Ajuste conforme o comprimento esperado da resposta
-    top_p: 1, // Controle de probabilidade acumulada
-    frequency_penalty: 0, // Penalidade de frequência
-    presence_penalty: 0, // Penalidade de presença
+        model: "gpt-4-turbo",
+        messages: [{
+          role: "system",
+          content: `Generate ${numQuestions} multiple-choice questions about ${subject} for ENEM exam preparation. Format each question with 4 options (A, B, C, D) and indicate the correct answer.`
+        }],
+        temperature: 0.4,
+        max_tokens: 1500,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
       }, {
         headers: {
           'Authorization': `Bearer ${API_KEY}`,
@@ -352,8 +320,7 @@ const Exercises = ({ exercises, setExercises }) => {
     </div>
   );
 };
-
-const Redacao = () => {
+         const Redacao = () => {
   const [tema, setTema] = useState('');
   const [conteudo, setConteudo] = useState('');
   const [timer, setTimer] = useState(0);
@@ -416,7 +383,6 @@ const Redacao = () => {
   };
 
   const analisarRedacaoComGPT = async (titulo, conteudo) => {
-
     const prompt = `Você é um professor experiente e altamente qualificado, especializado na correção de redações do ENEM. Sua tarefa é analisar a redação a seguir, considerando todos os critérios estabelecidos pelo edital do ENEM:
 
     Título: ${titulo}
@@ -446,19 +412,24 @@ const Redacao = () => {
 
     Análise da Redação:`;
 
-    const response = await axios.post(url, {
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 4000,
-      temperature: 0.5
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      }
-    });
+    try {
+      const response = await axios.post(API_URL, {
+        model: "gpt-4",
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 4000,
+        temperature: 0.5
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${API_KEY}`
+        }
+      });
 
-    return response.data.choices[0].message.content;
+      return response.data.choices[0].message.content;
+    } catch (error) {
+      console.error('Erro ao analisar redação:', error);
+      throw error;
+    }
   };
 
   return (
@@ -534,93 +505,6 @@ const Redacao = () => {
     </div>
   );
 };
-}
-
-export default Redacao;
-
-function loadRedacaoStyles() {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'styles/redacao.css';
-  link.id = 'redacao-css';
-  document.head.appendChild(link);
-}
-
-function removeRedacaoStyles() {
-  const link = document.getElementById('redacao-css');
-  if (link) {
-    document.head.removeChild(link);
-  }
-}
-
-function getTemasRecentes() {
-  return [
-    { id: 1, ano: 2023, nome: "Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil" },
-    { id: 2, ano: 2022, nome: "Desafios para a valorização de comunidades e povos tradicionais no Brasil" },
-    { id: 3, ano: 2021, nome: "Invisibilidade e registro civil: garantia de acesso à cidadania no Brasil" },
-    { id: 4, ano: 2020, nome: "O estigma associado às doenças mentais na sociedade brasileira" },
-    { id: 5, ano: 2019, nome: "Democratização do acesso ao cinema no Brasil" },
-    // ... (outros temas)
-  ];
-}
-  };
-
-  const startTimer = () => {
-    const interval = setInterval(() => {
-      setTimer((prevTimer) => {
-        if (prevTimer <= 0) {
-          clearInterval(interval);
-          toast.info('Tempo esgotado!');
-          return 0;
-        }
-        return prevTimer - 1;
-      });
-    }, 1000);
-  };
-
-  return (
-    <div className="mt-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Redação do ENEM</h2>
-      <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow">
-        <div className="mb-4">
-          <label className="block mb-2">Tema:</label>
-          <input
-            type="text"
-            value={tema}
-            onChange={(e) => setTema(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Conteúdo:</label>
-          <textarea
-            value={conteudo}
-            onChange={(e) => setConteudo(e.target.value)}
-            className="w-full p-2 border rounded"
-            rows="10"
-            required
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Timer (minutos):</label>
-          <input
-            type="number"
-            value={timer / 60}
-            onChange={(e) => setTimer(parseInt(e.target.value) * 60)}
-            className="w-full p-2 border rounded"
-          />
-          <button type="button" onClick={startTimer} className="mt-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-400 transition-colors">
-            Iniciar Timer
-          </button>
-        </div>
-        <button type="submit" className="w-full bg-green-700 text-white p-2 rounded hover:bg-green-600 transition-colors">
-          Enviar para Análise
-        </button>
-      </form>
-    </div>
-  );
-};
 
 const Chatbot = ({ chatHistory, setChatHistory }) => {
   const [input, setInput] = useState('');
@@ -687,47 +571,30 @@ const Chatbot = ({ chatHistory, setChatHistory }) => {
   );
 };
 
-// Assuming you have a Profile component, if not, you can create a basic one like this:
-const Profilepage = () => {
-  const [user, setUser] = useState(null);
+function loadRedacaoStyles() {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'styles/redacao.css';
+  link.id = 'redacao-css';
+  document.head.appendChild(link);
+}
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      toast.success('Logout realizado com sucesso!');
-    } catch (error) {
-      console.error('Erro ao fazer logout:', error);
-      toast.error('Erro ao fazer logout. Por favor, tente novamente.');
-    }
-  };
-
-  if (!user) {
-    return <Navigate to="/login" />;
+function removeRedacaoStyles() {
+  const link = document.getElementById('redacao-css');
+  if (link) {
+    document.head.removeChild(link);
   }
+}
 
-  return (
-    <div className="mt-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Perfil</h2>
-      <div className="bg-white p-4 rounded-lg shadow">
-        <p><strong>Nome:</strong> {user.displayName || 'N/A'}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <button 
-          onClick={handleLogout}
-          className="mt-4 bg-red-500 text-white p-2 rounded hover:bg-red-400 transition-colors"
-        >
-          Logout
-        </button>
-      </div>
-    </div>
-  );
-};
+function getTemasRecentes() {
+  return [
+    { id: 1, ano: 2023, nome: "Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil" },
+    { id: 2, ano: 2022, nome: "Desafios para a valorização de comunidades e povos tradicionais no Brasil" },
+    { id: 3, ano: 2021, nome: "Invisibilidade e registro civil: garantia de acesso à cidadania no Brasil" },
+    { id: 4, ano: 2020, nome: "O estigma associado às doenças mentais na sociedade brasileira" },
+    { id: 5, ano: 2019, nome: "Democratização do acesso ao cinema no Brasil" },
+    // ... (outros temas)
+  ];
+}
 
 export default MobileENEMApp;
-                    
