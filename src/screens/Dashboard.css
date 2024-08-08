@@ -1,28 +1,27 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.button {
-  background-color: #009739;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  margin: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.button:hover {
-  background-color: #007a31;
-}
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+  },
+  header: {
+    backgroundColor: '#006400',
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    color: '#fff',
+  },
+  content: {
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    marginBottom: 20,
+  },
+  description: {
+    fontSize: 16,
+    color: '#333',
+  },
