@@ -28,28 +28,29 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col h-screen bg-gray-100">
-        <Header />
-        <main className="flex-grow overflow-y-auto">
-          <Routes>
-            <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<SignUp />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/dashboard" element={renderContent()} />
-            <Route path="/lessons" element={renderContent()} />
-            <Route path="/exercises" element={renderContent()} />
-            <Route path="/redacao" element={renderContent()} />
-            <Route path="/chatbot" element={renderContent()} />
-          </Routes>
-          <ToastContainer />
-        </main>
-        <BottomNavigation activeSection={activeSection} setActiveSection={setActiveSection} />
+<div className="App">
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Routes>
+              <Route
+                path="/"
+                element={user ? <Navigate to="/profile" /> : <Login />}
+              />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<SignUp />} />
+              <Route path="/profile" element={<Profile />} />
+               <Route path="/Dashboard" element={<dashboard />} />
+              <Route path="/Lessons" element={<lessons />} />
+              <Route path="/Exercises" element={<exercises />} />
+                <Route path="/redacao" element={<redacao />} />
+              <Route path="/chatbot" element={<chatbot />} />    
+            </Routes>
+            <ToastContainer />
+          </div>
+        </div>
       </div>
     </Router>
   );
 }
-
-
 
 export default App;
