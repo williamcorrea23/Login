@@ -7,6 +7,11 @@ import { auth } from './components/firebase';
 import Login from './components/login';
 import SignUp from './components/register';
 import Profile from './components/profile';
+import Dashboard from '../screens/Dashboard';
+import lessons from '../screens/lessons';
+import Redacao from '../screens/redacao';
+import chatbot from '../screens/chatbot';
+import exercises from '../screens/exercises';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBook, faPencilAlt, faEdit, faComments, faUser } from '@fortawesome/free-solid-svg-icons';
 import './styles/custom-tailwind.css';
@@ -15,7 +20,7 @@ import './styles/globals.css';
 const API_KEY = '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';
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 
-const MobileENEMApp = () => {
+const App = () => {
   const [activeSection, setActiveSection] = useState('dashboard');
   const [chatHistory, setChatHistory] = useState([]);
   const [currentLesson, setCurrentLesson] = useState(null);
