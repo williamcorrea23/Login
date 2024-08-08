@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
-import { db } from './components/firebase';
+import { db } from './firebase';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
