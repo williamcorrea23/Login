@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc, updateDoc, increment, setDoc } from "firebase/firestore";
 import { marked } from 'marked';
-import './styles/Redacao.css'; // Assumindo que você criará este arquivo CSS
+import '../styles/Redacao.css'; // Assumindo que você criará este arquivo CSS
 
 const firebaseConfig = {
   apiKey: "AIzaSyDwNC4QWaBQYqvayl98oMArcGdYV0JuqSk",
