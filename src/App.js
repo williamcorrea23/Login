@@ -7,11 +7,10 @@ import { auth } from './components/firebase';
 import Login from './components/login';
 import SignUp from './components/register';
 import Profile from './components/profile';
-import Dashboard from './screens/Dashboard';
-import lessons from './screens/Lessons';
-import Redacao from './screens/redacao';
-import chatbot from './components/Chatbot';
-import exercises from './screens/Exercises';
+import Home from './pages/Home;
+import Aulas from './pages/Aulas';
+import Redacao from './pages/Redacao';
+import Exercicios from './pages/Exercicios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBook, faPencilAlt, faEdit, faComments, faUser } from '@fortawesome/free-solid-svg-icons';
 import './styles/custom-tailwind.css';
@@ -34,17 +33,15 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={user ? <Navigate to="/Dashboard" /> : <Login />}
+                element={user ? <Navigate to="/Home" /> : <Login />}
               />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
               <Route path="/profile" element={<Profile />} />
-               <Route path="/Dashboard" element={<dashboard />} />
-              <Route path="/Lessons" element={<lessons />} />
-              <Route path="/Exercises" element={<exercises />} />
-                <Route path="/redacao" element={<redacao />} />
-              <Route path="/chatbot" element={<chatbot />} />    
-            </Routes>
+              <Route path="/Aulas" element={<Aulas />} />
+              <Route path="/Exercicios" element={<Exercicios />} />
+              <Route path="/Redacao" element={<Redacao />} />
+               </Routes>
             <ToastContainer />
           </div>
         </div>
