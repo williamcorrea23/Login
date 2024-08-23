@@ -7,7 +7,7 @@ import { auth } from './components/firebase';
 import Login from './components/login';
 import SignUp from './components/register';
 import Profile from './components/profile';
-import Home from './pages/Home;'
+import Home from './pages/Home';
 import Aulas from './pages/Aulas';
 import Redacao from './pages/Redacao';
 import Exercicios from './pages/Exercicios';
