@@ -20,7 +20,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const apiKey = env.apikey;
+const apiKey = process.env.API_KEYy;
 
 const Redacao = () => {
   const [userId, setUserId] = useState(null);
