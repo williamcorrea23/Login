@@ -1,0 +1,149 @@
+/* Redacao.css */
+:root {
+  --primary-color: #10a37f;
+  --secondary-color: #f0f0f0;
+  --text-color: #333333;
+  --background-color: #ffffff;
+  --chat-bg: #f7f7f8;
+  --user-message-bg: #dcf8c6;
+  --ai-message-bg: #ffffff;
+  --button-hover: #0d8a6f;
+  --footer-bg: #f0f0f0;
+  --footer-active: #10a37f;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.instructions {
+  background-color: #e7f3ff;
+  border-left: 4px solid var(--primary-color);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#timer {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.timer-controls button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.essay-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#essayArea {
+  width: 100%;
+  min-height: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+#wordCount {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 4px;
+}
+
+#submitEssay {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.feedback-container {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.feedback-container h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.feedback-content {
+  margin-top: 10px;
+}
+
+/* Estilos para tornar o componente responsivo */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  #timer {
+    font-size: 20px;
+  }
+
+  .timer-controls button {
+    font-size: 14px;
+  }
+
+  #essayArea {
+    font-size: 14px;
+  }
+
+  #submitEssay {
+    font-size: 16px;
+  }
+}
