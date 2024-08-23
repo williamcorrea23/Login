@@ -11,7 +11,7 @@
     "firebase": "^10.10.0",
     "chart.js": "^4.5.1", // Latest version of Chart.js
     "marked": "^5.1.1",   // Latest version of marked
-    "react-chartjs-2": "^5.2.0" // React wrapper for Chart.js
+    "react-chartjs-2": "^5.2.0", // React wrapper for Chart.js
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
