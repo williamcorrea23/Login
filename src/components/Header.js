@@ -1,12 +1,16 @@
 import React from 'react';
-import './Header.css'; // Importe o arquivo CSS
-import { FaBars } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Header = ({ title }) => {
   return (
     <header className="header">
-      <h1 className="title">{title}</h1>
-      <FaBars className="icon" />
+      <h1>{title}</h1>
+      <nav>
+        <Link to="/">Dashboard</Link>
+        <Link to="/aulas">Aulas</Link>
+        <Link to="/exercicios">Exercícios</Link>
+        <Link to="/redacao">Redação</Link>
+      </nav>
     </header>
   );
 };
